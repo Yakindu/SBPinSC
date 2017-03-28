@@ -13,7 +13,7 @@
    <extension
          point="org.yakindu.sct.domain.modules">
       <Module
-            domainID="com.yakindu.domain.c"
+            domainID="com.yakindu.domain.scenario"
             feature="org.yakindu.sct.resource"
             moduleProvider="com.yakindu.sct.domain.scenario.ScenarioDomainResourceModuleProvider"></Module>
    </extension>
