@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Scenario-based Programming in Statecharts
+Bundle-SymbolicName: com.yakindu.sct.domain.scenario;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: com.yakindu.sct.domain.scenario.ScenarioActivator
+Bundle-Vendor: itemis AG
+Require-Bundle: org.eclipse.core.runtime,
+ org.yakindu.sct.domain.generic,
+ org.yakindu.sct.domain.generic.resource,
+ org.yakindu.sct.domain,
+ com.google.inject
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-ActivationPolicy: lazy

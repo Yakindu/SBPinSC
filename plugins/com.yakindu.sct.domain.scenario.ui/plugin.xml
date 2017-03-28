@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+ <extension
+         point="org.yakindu.sct.domain.modules">
+      <Module
+            domainID="com.yakindu.domain.scenario"
+            feature="org.yakindu.sct.simulation"
+            moduleProvider="com.yakindu.sct.domain.scenario.ui.simulation.ScenarioSimulationModuleProvider">
+      </Module>
+   </extension>
+   <extension
+         point="org.yakindu.sct.domain.modules">
+      <Module
+            domainID="com.yakindu.domain.scenario"
+            feature="org.yakindu.sct.editor"
+            moduleProvider="com.yakindu.sct.domain.scenario.ui.editor.ScenarioEditorModuleProvider">
+      </Module>
+   </extension>
+</plugin>
