@@ -1,0 +1,18 @@
+grammar com.yakindu.sct.domain.scenario.ScenarioText with org.yakindu.sct.model.stext.SText
+
+generate scenarioText "http://www.yakindu.com/sct/domain/scenario/ScenarioText"
+import "http://www.yakindu.org/sct/statechart/SText" as stext
+import "http://www.yakindu.org/base/expressions/Expressions" as exp
+import "http://www.yakindu.org/sct/sgraph/2.0.0" as sgraph
+import "http://www.yakindu.org/base/types/2.0.0" as types
+import "http://www.yakindu.org/base/base/2.0.0" as base
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+
+StateScope returns sgraph::Scope:
+	{StatScope}
+	(scenarios+=BlockScenario)*
+	(reactions+=(LocalReaction))*;
+
+BlockScenario:
+	'blocks' '{'
+	(events+=[types::Event|QID]+) '}';
