@@ -7,10 +7,18 @@
     <package 
        uri = "http://www.yakindu.com/sct/domain/scenario/ScenarioText" 
        class = "com.yakindu.sct.domain.scenario.scenarioText.ScenarioTextPackage"
-       genModel = "model/generated/ScenarioText.genmodel" /> 
+       genModel = "model/ScenarioText.genmodel" /> 
 	
   </extension>
 
 
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated ScenarioText -->
+      <package
+            uri="http://www.yakindu.com/sct/domain/scenario/ScenarioText"
+            class="com.yakindu.sct.domain.scenario.scenariotext.ScenarioTextPackage"
+            genModel="model/ScenarioText.genmodel"/>
+   </extension>
 
 </plugin>

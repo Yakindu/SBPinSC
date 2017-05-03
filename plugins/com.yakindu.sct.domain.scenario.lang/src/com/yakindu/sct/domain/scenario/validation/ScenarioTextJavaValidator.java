@@ -14,6 +14,8 @@ import org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 import org.yakindu.sct.model.stext.validation.STextJavaValidator;
 
+import com.yakindu.sct.domain.scenario.scenariotext.ScenarioTextPackage;
+
 @ComposedChecks(validators = { STextJavaValidator.class, SGraphJavaValidator.class, SCTResourceValidator.class,
 		ExpressionsJavaValidator.class })
 
@@ -23,7 +25,7 @@ public class ScenarioTextJavaValidator
 	@Override
 	protected List<EPackage> getEPackages() {
 		List<EPackage> result = new ArrayList<EPackage>();
-		result.add(com.yakindu.sct.domain.scenario.scenarioText.ScenarioTextPackage.eINSTANCE);
+		result.add(ScenarioTextPackage.eINSTANCE);
 		result.add(EPackage.Registry.INSTANCE.getEPackage("http://www.yakindu.org/sct/sgraph/2.0.0"));
 		result.add(EPackage.Registry.INSTANCE.getEPackage("http://www.yakindu.org/base/base/2.0.0"));
 		result.add(EPackage.Registry.INSTANCE.getEPackage("http://www.yakindu.org/base/types/2.0.0"));
