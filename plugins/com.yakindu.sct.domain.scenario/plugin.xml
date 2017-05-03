@@ -10,11 +10,11 @@
             name="Scenario-based Statecharts">
       </Domain>
    </extension>
-   <extension
+      <extension
          point="org.yakindu.sct.domain.modules">
       <Module
             domainID="com.yakindu.domain.scenario"
-            feature="org.yakindu.sct.resource"
-            moduleProvider="com.yakindu.sct.domain.scenario.ScenarioDomainResourceModuleProvider"></Module>
+            feature="org.yakindu.sct.generator"
+            moduleProvider="org.yakindu.sct.domain.generic.generator.GeneratorModuleProvider"></Module>
    </extension>
 </plugin>

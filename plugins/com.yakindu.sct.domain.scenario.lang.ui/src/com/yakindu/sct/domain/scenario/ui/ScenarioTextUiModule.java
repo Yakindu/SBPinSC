@@ -4,7 +4,6 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.resource.clustering.DynamicResourceClusteringPolicy;
 import org.eclipse.xtext.resource.clustering.IResourceClusteringPolicy;
-import org.eclipse.xtext.tasks.ITaskFinder;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.ParserBasedContentAssistContextFactory.StatefulFactory;
 import org.eclipse.xtext.ui.editor.hover.DispatchingEObjectTextHover;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHover;
@@ -13,7 +12,6 @@ import org.eclipse.xtext.ui.editor.hover.ProblemAnnotationHover;
 import org.eclipse.xtext.ui.editor.model.IResourceForEditorInputFactory;
 import org.eclipse.xtext.ui.editor.model.JavaClassPathResourceForIEditorInputFactory;
 import org.eclipse.xtext.ui.editor.model.ResourceForIEditorInputFactory;
-import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.resource.SimpleResourceSetProvider;
 import org.eclipse.xtext.ui.resource.XtextResourceSetProvider;
@@ -22,8 +20,6 @@ import org.yakindu.base.utils.jface.help.CrossRefObjectTextHover;
 import org.yakindu.sct.model.stext.ui.contentassist.STextStatefulFactory;
 import org.yakindu.sct.model.stext.ui.help.CustomCSSHelpHoverProvider;
 import org.yakindu.sct.model.stext.ui.help.STextUserHelpDocumentationProvider;
-import org.yakindu.sct.model.stext.ui.highlighting.SCTHighlightingConfiguration;
-import org.yakindu.sct.model.stext.ui.tasks.STextTaskFinder;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -90,13 +86,13 @@ public class ScenarioTextUiModule extends AbstractScenarioTextUiModule {
 		return ProblemAnnotationHover.class;
 	}
 
-	public Class<? extends IHighlightingConfiguration> bindIHighlightingConfiguration() {
-		return SCTHighlightingConfiguration.class;
-	}
-
-	public Class<? extends ITaskFinder> bindITaskFinder() {
-		return STextTaskFinder.class;
-	}
+//	public Class<? extends IHighlightingConfiguration> bindIHighlightingConfiguration() {
+//		return SCTHighlightingConfiguration.class;
+//	}
+//
+//	public Class<? extends ITaskFinder> bindITaskFinder() {
+//		return STextTaskFinder.class;
+//	}
 
 	public Class<? extends IResourceClusteringPolicy> bindIResourceClusteringPolicy() {
 		return DynamicResourceClusteringPolicy.class;

@@ -15,6 +15,7 @@ Require-Bundle: org.eclipse.ui,
  org.yakindu.sct.model.stext.ui,
  com.yakindu.sct.domain.scenario.lang,
  com.yakindu.sct.domain.scenario.lang.ui,
- org.eclipse.xtext.ui
+ org.eclipse.xtext.ui,
+ org.eclipse.xtext.ui.shared;bundle-version="2.10.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy

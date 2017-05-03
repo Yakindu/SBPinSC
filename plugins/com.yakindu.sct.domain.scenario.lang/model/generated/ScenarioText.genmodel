@@ -9,11 +9,14 @@
     usedGenPackages="platform:/resource/org.yakindu.base.types/model/types.genmodel#//types platform:/resource/org.yakindu.sct.model.sgraph/model/emf/sgraph.genmodel#//sgraph">
   <genPackages prefix="ScenarioText" basePackage="com.yakindu.sct.domain.scenario"
       disposableProviderFactory="true" fileExtensions="sbp" ecorePackage="ScenarioText.ecore#/">
-    <genClasses ecoreClass="ScenarioText.ecore#//BlockScenario">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ScenarioText.ecore#//BlockScenario/events"/>
+    <genClasses ecoreClass="ScenarioText.ecore#//BlockedEventSet">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ScenarioText.ecore#//BlockedEventSet/events"/>
     </genClasses>
-    <genClasses ecoreClass="ScenarioText.ecore#//StatScope">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ScenarioText.ecore#//StatScope/scenarios"/>
+    <genClasses ecoreClass="ScenarioText.ecore#//RequestedEventSet">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ScenarioText.ecore#//RequestedEventSet/events"/>
+    </genClasses>
+    <genClasses ecoreClass="ScenarioText.ecore#//StateScope">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ScenarioText.ecore#//StateScope/scenarios"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

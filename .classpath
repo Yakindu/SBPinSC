@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="plugins/com.yakindu.sct.domain.scenario.lang.ui/src"/>
+	<classpathentry kind="src" path="plugins/com.yakindu.sct.domain.scenario.lang.ui/src-gen"/>
+	<classpathentry kind="src" path="plugins/com.yakindu.sct.domain.scenario.lang.ui/xtend-gen"/>
+	<classpathentry kind="src" path="plugins/com.yakindu.sct.domain.scenario.lang/src"/>
+	<classpathentry kind="src" path="plugins/com.yakindu.sct.domain.scenario.lang/src-gen"/>
+	<classpathentry kind="src" path="plugins/com.yakindu.sct.domain.scenario.lang/xtend-gen"/>
+	<classpathentry kind="src" path="plugins/com.yakindu.sct.domain.scenario.ui/src"/>
+	<classpathentry kind="src" path="plugins/com.yakindu.sct.domain.scenario/src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="plugins/com.yakindu.sct.domain.scenario/bin"/>
+</classpath>
