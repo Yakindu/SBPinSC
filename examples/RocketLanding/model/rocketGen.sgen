@@ -1,0 +1,16 @@
+GeneratorModel for yakindu::java::scenario {
+
+	statechart gameObjects {
+
+		feature Outlet {
+			targetProject = "RocketLanding"
+			targetFolder = "src-gen"
+			libraryTargetFolder = "src"
+		}
+		
+		feature GeneralFeatures {
+			TimerService = true
+			InterfaceObserverSupport = true
+		}
+	}
+}
