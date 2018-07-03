@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: YAKINDU Scenario Java Generator
+Bundle-SymbolicName: com.yakindu.sct.scenario.generator.java;singleton:=true
+Bundle-Version: 3.4.0.qualifier
+Require-Bundle: org.yakindu.sct.model.stext,
+ org.yakindu.sct.generator.core,
+ org.yakindu.sct.generator.genmodel,
+ com.yakindu.sct.domain.scenario;bundle-version="1.0.0",
+ com.yakindu.sct.domain.scenario.lang;bundle-version="1.0.0",
+ com.yakindu.sct.domain.scenario.lang.ui;bundle-version="1.0.0",
+ com.yakindu.sct.domain.scenario.ui;bundle-version="1.0.0"
+Bundle-Vendor: statecharts.org
+Export-Package: com.yakindu.sct.scenario.generator.java,
+ com.yakindu.sct.scenario.generator.java.features,
+ com.yakindu.sct.scenario.generator.java.types
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+

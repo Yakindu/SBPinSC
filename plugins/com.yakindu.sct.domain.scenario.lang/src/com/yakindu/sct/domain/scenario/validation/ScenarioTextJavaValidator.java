@@ -9,15 +9,13 @@ import java.util.List;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.validation.ComposedChecks;
 import org.yakindu.base.expressions.validation.ExpressionsJavaValidator;
-import org.yakindu.sct.model.sgraph.validation.SCTResourceValidator;
 import org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 import org.yakindu.sct.model.stext.validation.STextJavaValidator;
 
 import com.yakindu.sct.domain.scenario.scenariotext.ScenarioTextPackage;
 
-@ComposedChecks(validators = { STextJavaValidator.class, SGraphJavaValidator.class, SCTResourceValidator.class,
-		ExpressionsJavaValidator.class })
+@ComposedChecks(validators = { STextJavaValidator.class, SGraphJavaValidator.class, ExpressionsJavaValidator.class })
 
 public class ScenarioTextJavaValidator
 		extends com.yakindu.sct.domain.scenario.validation.AbstractScenarioTextJavaValidator {

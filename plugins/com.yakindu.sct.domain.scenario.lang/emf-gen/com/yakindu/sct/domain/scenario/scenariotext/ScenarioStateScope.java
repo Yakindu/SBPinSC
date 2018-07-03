@@ -27,7 +27,7 @@ import org.yakindu.sct.model.sgraph.Scope;
 public interface ScenarioStateScope extends Scope {
 	/**
 	 * Returns the value of the '<em><b>Event Sets</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.emf.ecore.EObject}.
+	 * The list contents are of type {@link com.yakindu.sct.domain.scenario.scenariotext.EventSet}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Event Sets</em>' containment reference list isn't clear,
@@ -39,6 +39,6 @@ public interface ScenarioStateScope extends Scope {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<EObject> getEventSets();
+	EList<EventSet> getEventSets();
 
 } // ScenarioStateScope

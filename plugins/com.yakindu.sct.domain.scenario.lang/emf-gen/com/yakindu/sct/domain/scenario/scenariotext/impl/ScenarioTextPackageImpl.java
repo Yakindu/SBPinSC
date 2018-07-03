@@ -6,6 +6,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.types.TypesPackage;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 
@@ -98,7 +99,9 @@ public class ScenarioTextPackageImpl extends EPackageImpl implements ScenarioTex
 		isInited = true;
 
 		// Initialize simple dependencies
+		TypesPackage.eINSTANCE.eClass();
 		SGraphPackage.eINSTANCE.eClass();
+		BasePackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theScenarioTextPackage.createPackageContents();
@@ -250,7 +253,7 @@ public class ScenarioTextPackageImpl extends EPackageImpl implements ScenarioTex
 		initEClass(requestedEventSetEClass, RequestedEventSet.class, "RequestedEventSet", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(scenarioStateScopeEClass, ScenarioStateScope.class, "ScenarioStateScope", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getScenarioStateScope_EventSets(), ecorePackage.getEObject(), null, "eventSets", null, 0, -1, ScenarioStateScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getScenarioStateScope_EventSets(), this.getEventSet(), null, "eventSets", null, 0, -1, ScenarioStateScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(eventSetEClass, EventSet.class, "EventSet", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getEventSet_Events(), theTypesPackage.getEvent(), null, "events", null, 0, -1, EventSet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -2,6 +2,7 @@
  */
 package com.yakindu.sct.domain.scenario.scenariotext.impl;
 
+import com.yakindu.sct.domain.scenario.scenariotext.EventSet;
 import com.yakindu.sct.domain.scenario.scenariotext.ScenarioStateScope;
 import com.yakindu.sct.domain.scenario.scenariotext.ScenarioTextPackage;
 
@@ -42,7 +43,7 @@ public class ScenarioStateScopeImpl extends ScopeImpl implements ScenarioStateSc
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<EObject> eventSets;
+	protected EList<EventSet> eventSets;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -67,9 +68,9 @@ public class ScenarioStateScopeImpl extends ScopeImpl implements ScenarioStateSc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<EObject> getEventSets() {
+	public EList<EventSet> getEventSets() {
 		if (eventSets == null) {
-			eventSets = new EObjectContainmentEList<EObject>(EObject.class, this, ScenarioTextPackage.SCENARIO_STATE_SCOPE__EVENT_SETS);
+			eventSets = new EObjectContainmentEList<EventSet>(EventSet.class, this, ScenarioTextPackage.SCENARIO_STATE_SCOPE__EVENT_SETS);
 		}
 		return eventSets;
 	}
@@ -113,7 +114,7 @@ public class ScenarioStateScopeImpl extends ScopeImpl implements ScenarioStateSc
 		switch (featureID) {
 			case ScenarioTextPackage.SCENARIO_STATE_SCOPE__EVENT_SETS:
 				getEventSets().clear();
-				getEventSets().addAll((Collection<? extends EObject>)newValue);
+				getEventSets().addAll((Collection<? extends EventSet>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

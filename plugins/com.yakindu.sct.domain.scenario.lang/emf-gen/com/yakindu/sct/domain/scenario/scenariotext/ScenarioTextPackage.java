@@ -151,7 +151,7 @@ public interface ScenarioTextPackage extends EPackage {
 	int SCENARIO_STATE_SCOPE = 2;
 
 	/**
-	 * The feature id for the '<em><b>Declarations</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Declarations</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -178,13 +178,22 @@ public interface ScenarioTextPackage extends EPackage {
 	int SCENARIO_STATE_SCOPE__VARIABLES = SGraphPackage.SCOPE__VARIABLES;
 
 	/**
-	 * The feature id for the '<em><b>Reactions</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Reactions</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
 	int SCENARIO_STATE_SCOPE__REACTIONS = SGraphPackage.SCOPE__REACTIONS;
+
+	/**
+	 * The feature id for the '<em><b>Members</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCENARIO_STATE_SCOPE__MEMBERS = SGraphPackage.SCOPE__MEMBERS;
 
 	/**
 	 * The feature id for the '<em><b>Event Sets</b></em>' containment reference list.
