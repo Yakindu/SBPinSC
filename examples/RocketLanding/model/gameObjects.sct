@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_qQbi4Li9Eee0RvvjCgy_jA" specification="interface:&#xA;&#xA;var wall1lLocation : integer = 10&#xA;var wall2Location : integer = 210&#xA;var rocketX : integer = 100&#xA;var rocketY : integer = 50&#xA;var rocketWidth : integer&#xA;var rocketHeight : integer&#xA;var baseX : integer&#xA;var leftWall : integer&#xA;var rightWall : integer&#xA;var groundLevel : integer&#xA;&#xA;in event initSystem&#xA;in event tryLowerRocket&#xA;in event tryMoveRocketRight&#xA;in event tryMoveRocketLeft&#xA;in event rocketLanded&#xA;in event leftButtonPressed&#xA;in event rightButtonPressed&#xA;in event pausePressed&#xA;&#xA;out event gameOverLose&#xA;out event gameOverWin&#xA;out event displayPauseMessage&#xA;out event deletePauseMessage&#xA;&#xA;&#xA;" name="gameObjects" domainID="com.yakindu.domain.scenario">
+  <sgraph:Statechart xmi:id="_qQbi4Li9Eee0RvvjCgy_jA" specification="interface:&#xA;&#xA;var wall1lLocation : integer = 10&#xA;var wall2Location : integer = 210&#xA;var rocketX : integer = 100&#xA;var rocketY : integer = 50&#xA;var rocketMoveStep : integer = 10&#xA;var rocketWidth : integer&#xA;var rocketHeight : integer&#xA;var baseX : integer&#xA;var leftWall : integer&#xA;var rightWall : integer&#xA;var groundLevel : integer&#xA;&#xA;in event initSystem&#xA;in event tryLowerRocket&#xA;in event tryMoveRocketRight&#xA;in event tryMoveRocketLeft&#xA;in event rocketLanded&#xA;in event leftButtonPressed&#xA;in event rightButtonPressed&#xA;in event pausePressed&#xA;&#xA;out event gameOverLose&#xA;out event gameOverWin&#xA;out event displayPauseMessage&#xA;out event deletePauseMessage&#xA;&#xA;&#xA;" name="gameObjects" domainID="com.yakindu.domain.scenario">
     <regions xmi:id="_k0qBQLi-Eee0RvvjCgy_jA" name="LeftButtonSensor">
       <vertices xsi:type="sgraph:State" xmi:id="_QcFzIL5EEeevQq-5BwDY8Q" name="notPressed" incomingTransitions="_RqNzIL5EEeevQq-5BwDY8Q _UzUSEL5EEeevQq-5BwDY8Q">
         <outgoingTransitions xmi:id="_SZ8m8L5EEeevQq-5BwDY8Q" specification="leftButtonPressed" target="_SZ3ucL5EEeevQq-5BwDY8Q"/>
@@ -28,7 +28,7 @@
         <outgoingTransitions xmi:id="_Uw1KgLl9EeeE6IK0AfwnoA" specification="" target="_zc4nMLjEEee0RvvjCgy_jA"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_zc4nMLjEEee0RvvjCgy_jA" specification="" name="Landing" incomingTransitions="_Uw1KgLl9EeeE6IK0AfwnoA">
-        <outgoingTransitions xmi:id="_rdEJ4Mh7EeeFz9Yjn8PS_w" specification="[rocketHeight + rocketY &#xD;&#xA;== groundLevel]" target="_q2aZkMh7EeeFz9Yjn8PS_w"/>
+        <outgoingTransitions xmi:id="_rdEJ4Mh7EeeFz9Yjn8PS_w" specification="[rocketHeight + rocketY &#xD;&#xA;>= groundLevel]" target="_q2aZkMh7EeeFz9Yjn8PS_w"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_oLpccMh7EeeFz9Yjn8PS_w" specification="block tryMoveRocketLeft,&#xD;&#xA;tryMoveRocketRight,&#xD;&#xA;tryLowerRocket" name="endGame">
         <regions xmi:id="_qht78Mh7EeeFz9Yjn8PS_w" name="r1">
@@ -48,7 +48,7 @@
     </regions>
     <regions xmi:id="_lUM-B8oXEeeCpYM8ZmA-Tg" name="Gravity">
       <vertices xsi:type="sgraph:State" xmi:id="_lUQBUMoXEeeCpYM8ZmA-Tg" specification="" name="gravity" incomingTransitions="_lUOzN8oXEeeCpYM8ZmA-Tg _lUOzMsoXEeeCpYM8ZmA-Tg">
-        <outgoingTransitions xmi:id="_lUQoYsoXEeeCpYM8ZmA-Tg" specification="after 50 ms" target="_lUNlHMoXEeeCpYM8ZmA-Tg"/>
+        <outgoingTransitions xmi:id="_lUQoYsoXEeeCpYM8ZmA-Tg" specification="after 20 ms" target="_lUNlHMoXEeeCpYM8ZmA-Tg"/>
       </vertices>
       <vertices xsi:type="sgraph:Entry" xmi:id="_lUOzMcoXEeeCpYM8ZmA-Tg">
         <outgoingTransitions xmi:id="_lUOzN8oXEeeCpYM8ZmA-Tg" specification="" target="_lUQBUMoXEeeCpYM8ZmA-Tg"/>
@@ -65,12 +65,12 @@
             <outgoingTransitions xmi:id="_MBGSkMI2EeevQq-5BwDY8Q" target="_MBDPQMI2EeevQq-5BwDY8Q"/>
           </vertices>
           <vertices xsi:type="sgraph:State" xmi:id="_MBDPQMI2EeevQq-5BwDY8Q" name="actuator" incomingTransitions="_MBGSkMI2EeevQq-5BwDY8Q _RzqHEMI2EeevQq-5BwDY8Q">
-            <outgoingTransitions xmi:id="_RzqHEMI2EeevQq-5BwDY8Q" specification="tryLowerRocket / &#xD;&#xA;rocketY += 5" target="_MBDPQMI2EeevQq-5BwDY8Q"/>
+            <outgoingTransitions xmi:id="_RzqHEMI2EeevQq-5BwDY8Q" specification="tryLowerRocket / &#xD;&#xA;rocketY += 1" target="_MBDPQMI2EeevQq-5BwDY8Q"/>
           </vertices>
         </regions>
         <regions xmi:id="_J3kaQMI2EeevQq-5BwDY8Q" name="MoveLeftActuator">
           <vertices xsi:type="sgraph:State" xmi:id="_hZjboMLrEeevQq-5BwDY8Q" name="actuator" incomingTransitions="_oFB1IMLrEeevQq-5BwDY8Q _1yZkEMLrEeevQq-5BwDY8Q">
-            <outgoingTransitions xmi:id="_oFB1IMLrEeevQq-5BwDY8Q" specification="tryMoveRocketLeft&#xD;&#xA;/ rocketX -= 20" target="_hZjboMLrEeevQq-5BwDY8Q"/>
+            <outgoingTransitions xmi:id="_oFB1IMLrEeevQq-5BwDY8Q" specification="tryMoveRocketLeft&#xD;&#xA;/ rocketX -= rocketMoveStep" target="_hZjboMLrEeevQq-5BwDY8Q"/>
           </vertices>
           <vertices xsi:type="sgraph:Entry" xmi:id="_1d3egMLrEeevQq-5BwDY8Q">
             <outgoingTransitions xmi:id="_1yZkEMLrEeevQq-5BwDY8Q" specification="" target="_hZjboMLrEeevQq-5BwDY8Q"/>
@@ -78,7 +78,7 @@
         </regions>
         <regions xmi:id="_tylYYMLsEeevQq-5BwDY8Q" name="MoveRightActuator">
           <vertices xsi:type="sgraph:State" xmi:id="_v_ps4MLsEeevQq-5BwDY8Q" name="actuator" incomingTransitions="_xUuCYMLsEeevQq-5BwDY8Q _mvsVI864EeeCzMV7JlytIg">
-            <outgoingTransitions xmi:id="_mvsVI864EeeCzMV7JlytIg" specification="tryMoveRocketRight&#xD;&#xA;/rocketX += 20" target="_v_ps4MLsEeevQq-5BwDY8Q"/>
+            <outgoingTransitions xmi:id="_mvsVI864EeeCzMV7JlytIg" specification="tryMoveRocketRight&#xD;&#xA;/rocketX += rocketMoveStep" target="_v_ps4MLsEeevQq-5BwDY8Q"/>
           </vertices>
           <vertices xsi:type="sgraph:Entry" xmi:id="_w77H4MLsEeevQq-5BwDY8Q">
             <outgoingTransitions xmi:id="_xUuCYMLsEeevQq-5BwDY8Q" specification="" target="_v_ps4MLsEeevQq-5BwDY8Q"/>
