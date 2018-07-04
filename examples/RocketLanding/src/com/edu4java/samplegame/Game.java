@@ -11,12 +11,13 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.Timer;
 
 import org.yakindu.scr.TimerService;
 import org.yakindu.scr.gameobjects.GameObjectsStatemachine;
@@ -25,19 +26,21 @@ import org.yakindu.scr.gameobjects.IGameObjectsStatemachine.SCInterfaceListener;
 @SuppressWarnings("serial")
 
 public class Game extends JPanel implements KeyListener, ActionListener {
+	
+	public static final int FRAME_WIDTH = 300;
+	public static  final int FRAME_HEIGHT = 400;
 
 	private Base base;
 	private Ground ground;
 	private Wall wall1;
 	private Wall wall2;
 	private Rocket rocket;
+	private Background bg;
 	
-	Timer t = new Timer(5, this);
 	
 	public Game(){
 		super();
 		
-		t.start();
 		addKeyListener(this);
 		setFocusable(true);
 		setFocusTraversalKeysEnabled(false);
@@ -45,8 +48,9 @@ public class Game extends JPanel implements KeyListener, ActionListener {
 		this.base = new Base();
 		this.ground = new Ground(0, 340, 300, 30);
 		this.wall1 = new Wall(10);
-		this.wall2 = new Wall(250);
-		this.rocket = new Rocket(this.wall1.getLocation()+10, this.wall2.getLocation(), 10, 100);
+		this.wall2 = new Wall(270);
+		this.rocket = new Rocket(this.wall1.getLocation()+10, this.wall2.getLocation(), 10, 50);
+		this.bg = new Background();
 	}
 
 	@Override
@@ -56,6 +60,7 @@ public class Game extends JPanel implements KeyListener, ActionListener {
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
 		
+		bg.paint(g2d);
 		ground.paint(g2d);
 		base.paint(g2d);
 		wall1.paint(g2d);
@@ -91,6 +96,29 @@ public class Game extends JPanel implements KeyListener, ActionListener {
 
 	@Override
 	public void keyReleased(KeyEvent e){}
+	
+	private class Background implements GameAsset {
+		private Image image;
+		
+		public Background() {
+			try {
+				this.image = ImageIO.read(new File("resources/sunrise-153600_1280.png"));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		@Override
+		public void paint(Graphics2D g2d) {
+			g2d.drawImage(this.image, 
+					0, 0,
+					FRAME_WIDTH, FRAME_HEIGHT,
+					0, 0,
+					this.image.getWidth(null), this.image.getHeight(null), 
+					null);
+		}
+		
+	}
 
 
 	private class Base implements GameAsset {
@@ -124,15 +152,20 @@ public class Game extends JPanel implements KeyListener, ActionListener {
 
 
 	private class Wall implements GameAsset {
+		public static final int HEIGHT = 500;
+		public static final int WIDTH = 20;
 
 		private int location;
+		private List<Shape> shapes;
 
 		public Wall(int location){
 			this.location = location;
+			this.shapes = new ArrayList<>();
+			createGrid();
 		}
 
 		public Shape getShape(){
-			return new Rectangle(location, 10, 10, 500);
+			return new Rectangle(0, 0, WIDTH, HEIGHT);
 		}
 
 		public int getLocation(){
@@ -140,7 +173,49 @@ public class Game extends JPanel implements KeyListener, ActionListener {
 		}
 		
 		public void paint(Graphics2D g2d) {
-			g2d.fill(this.getShape());
+			g2d.translate(location, 10);
+			// left upright
+			g2d.fill(new Rectangle(0, 0, 2, HEIGHT));
+			g2d.translate(18, 0);
+			g2d.fill(new Rectangle(0, 0, 2, HEIGHT));
+			g2d.translate(-g2d.getTransform().getTranslateX(), -g2d.getTransform().getTranslateY());
+			g2d.translate(location, 10);
+			g2d.rotate(Math.toRadians(-45));
+			// left downward facing
+			while(g2d.getTransform().getTranslateY() < HEIGHT + 10) {
+				g2d.fill(new Rectangle(0, 0, 2, (int)Math.sqrt(200d)));
+				g2d.rotate(Math.toRadians(45));
+				g2d.translate(0, 10);
+				g2d.rotate(Math.toRadians(-45));
+			}
+			g2d.rotate(Math.toRadians(45));
+			g2d.translate(-g2d.getTransform().getTranslateX(), -g2d.getTransform().getTranslateY());
+			
+			g2d.translate(location + WIDTH - 1, 10);
+			g2d.rotate(Math.toRadians(45));
+			// right upward facing
+			while(g2d.getTransform().getTranslateY() < HEIGHT + 10) {
+				g2d.fill(new Rectangle(0, 0, 2, (int)Math.sqrt(200d)));
+				g2d.rotate(Math.toRadians(-45));
+				g2d.translate(0, 10);
+				g2d.rotate(Math.toRadians(45));
+			}
+			g2d.rotate(Math.toRadians(-45));
+			g2d.translate(-g2d.getTransform().getTranslateX(), -g2d.getTransform().getTranslateY());
+			g2d.translate(location, 9);
+			while(g2d.getTransform().getTranslateY() < HEIGHT + 10) {
+				g2d.fill(new Rectangle(0, 0, WIDTH, 2));
+				g2d.translate(0, 10);
+			}
+			
+			g2d.translate(-g2d.getTransform().getTranslateX(), -g2d.getTransform().getTranslateY());
+		}
+		
+		protected void createGrid() {
+			//left upright
+			shapes.add(new Rectangle(location, 10, 2, HEIGHT));
+			//right upright
+			shapes.add(new Rectangle(location + 18, 10, 2, HEIGHT));
 		}
 	}
 	
@@ -179,7 +254,7 @@ public class Game extends JPanel implements KeyListener, ActionListener {
 			this.sm = new GameObjectsStatemachine();
 			sm.setTimer(new TimerService());
 			sm.init();
-			sm.setLeftWall(wall1);
+			sm.setLeftWall(wall1+10);
 			sm.setRightWall(wall2);
 			sm.setRocketWidth(width);
 			sm.setRocketHeight(height);
@@ -277,7 +352,7 @@ public class Game extends JPanel implements KeyListener, ActionListener {
 		Game game = new Game();
 
 		frame.add(game);
-		frame.setSize(300, 400);
+		frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -285,7 +360,7 @@ public class Game extends JPanel implements KeyListener, ActionListener {
 			//game.base.moveBase();
 			game.rocket.moveRocket();
 			game.repaint();
-			Thread.sleep(10);
+			Thread.sleep(19);
 		}
 	}
 
