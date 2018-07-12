@@ -34,6 +34,7 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.eclipse.xtext.util.Strings.*
+import org.yakindu.sct.model.stext.stext.StatechartScope
 
 class Statemachine {
 	
@@ -694,12 +695,8 @@ class Statemachine {
 			} 
 			switch (chosenEvent) {
 				«FOR event : myList»
-					«IF event.direction.value == 1»
-						case "«event.name.toFirstLower»" : raise«event.name.toFirstUpper»();
-						break;
-					«ENDIF»
-					«IF event.direction.value == 2»
-						case "«event.name.toFirstLower»" : sCInterface.raise«event.name.toFirstUpper»();
+					«IF event.direction == Direction.IN»
+						case "«event.symbol»" : «(event.scope as InterfaceScope).interfaceName.asEscapedIdentifier».raise«event.name.asName»();
 						break;
 					«ENDIF»
 				«ENDFOR»
@@ -708,11 +705,20 @@ class Statemachine {
 		
 	'''
 	
-	def protected EList<Event> getAllEvents(ExecutionFlow flow){
-		val scopes = flow.scopes
-		val myScope = scopes.get(0)
-		val eventList = myScope.events
-		return eventList
+	def protected symbol(Event it) {
+		if ((it.scope as StatechartScope).isDefaultInterface) 
+			it.identifier
+		else 
+			(it.scope as InterfaceScope).name + "." + it.identifier
+	}
+	
+	def protected List<Event> getAllEvents(ExecutionFlow flow){
+//		val scopes = flow.scopes
+//		val myScope = scopes.get(0)
+//		val eventList = myScope.events
+//		return eventList
+//		
+		return flow.scopes.map[ s | s.events].flatten.filter(e | e instanceof EventDefinition).toList
 	}
 	
 	def protected getGetRequestedFunctions(ExecutionFlow flow)'''
@@ -722,7 +728,7 @@ class Statemachine {
 		«val sourceState = state.sourceElement as State»
 			«FOR requestedEventSet : sourceState.scopes.filter(ScenarioStateScope).map[eventSets.filter(RequestedEventSet)].flatten»
 				«FOR event : requestedEventSet.events»
-					requestedList.add("«event.name.toFirstLower»");
+					requestedList.add("«event.symbol»");
 				«ENDFOR»
 			«ENDFOR»
 		«IF state.superScope.superScope.superScope !== null»
@@ -742,7 +748,7 @@ class Statemachine {
 		«val sourceState = state.sourceElement as State»
 			«FOR blockedEventSet : sourceState.scopes.filter(ScenarioStateScope).map[eventSets.filter(BlockedEventSet)].flatten»
 				«FOR event : blockedEventSet.events»
-					blockedList.add("«event.name.toFirstLower»");
+					blockedList.add("«event.symbol»");
 				«ENDFOR»
 			«ENDFOR»
 		«IF state.superScope.superScope.superScope !== null»
