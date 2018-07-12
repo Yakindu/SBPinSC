@@ -4,16 +4,19 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.Shape;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.Random;
-import org.yakindu.scr.gameobjects.GameObjectsStatemachine;
-import org.yakindu.scr.TimerService;
-import org.yakindu.scr.gameobjects.IGameObjectsStatemachine.SCInterfaceListener;
-import javax.swing.*;
-import java.awt.event.*;
-import java.awt.geom.*;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.Timer;
+
+import org.yakindu.scr.TimerService;
+import org.yakindu.scr.rocketlanding2.IRocketLanding2Statemachine.SCIGameListener;
+import org.yakindu.scr.rocketlanding2.RocketLanding2Statemachine;
 
 @SuppressWarnings("serial")
 
@@ -53,6 +56,7 @@ public class Game extends JPanel implements ActionListener, KeyListener {
         g2d.fill(wall1.getShape());
         g2d.fill(wall2.getShape());
         g2d.fill(rocket.getShape());
+        System.out.println("" + rocket.getShape().getBounds());
         g2d.drawString(rocket.getString(), 150, 50);
     }
     
@@ -88,7 +92,7 @@ public class Game extends JPanel implements ActionListener, KeyListener {
 			this.rand = new Random();
 		}
 		
-		private int location = 150;
+		public int location = 150;
 		
 		public int getLocation(){
 			return location;
@@ -126,60 +130,60 @@ public class Game extends JPanel implements ActionListener, KeyListener {
 
 	private class Rocket{
 
-		private GameObjectsStatemachine sm;
+		private RocketLanding2Statemachine sm;
 		private String s;
 		
 		public Rocket(int wall1, int wall2, int width, int height){
 			
 			this.s = "";
 			
-			this.sm = new GameObjectsStatemachine();
+			this.sm = new RocketLanding2Statemachine();
 			sm.setTimer(new TimerService());
 			sm.init();
-			sm.setLeftWall(wall1);
-			sm.setRightWall(wall2);
-			sm.setRocketWidth(width);
-			sm.setRocketHeight(height);
-			sm.setGroundLevel(340);
-			sm.setBaseX(150);
-			sm.getSCInterface().getListeners().add(myL);
+			sm.getSCILeftWall().setX(wall1);
+			sm.getSCIRightWall().setX(wall2);
+			sm.getSCIRocket().setWidth(width);
+			sm.getSCIRocket().setHeight(height);
+			sm.getSCIGround().setLevel(340);
+			sm.getSCIPlatform().setX(150);
+			sm.getSCIGame().getListeners().add(myGameEventListener);
 			sm.enter();
-			sm.raiseInitSystem();
 		}
 		
 		public void pause() {
-			sm.raisePausePressed();
+			sm.getSCIGame().raisePausePressed();
 			
 		}
 
-		SCInterfaceListener myL = new SCInterfaceListener() {
+		
+		SCIGameListener myGameEventListener = new SCIGameListener() {
 			
 			@Override
-			public void onGameOverWinRaised() {
-				s = "YOU WIN!";
-				
+			public void onOverWonRaised() {
+				s = "YOU WON!";				
 			}
 			
 			@Override
-			public void onGameOverLoseRaised() {
-				s = "YOU LOSE!";
-				
+			public void onOverLoseRaised() {
+				s = "YOU LOSE!";				
 			}
-				
+			
 			@Override
-			public void onDisplayPauseMessageRaised() {
+			public void onCountDownRaised(long value) {
+				s = "Count Down " + value;			
+			}
+
+			@Override
+			public void onPausedRaised() {
 				s = "Game Paused";
 				
 			}
 
 			@Override
-			public void onDeletePauseMessageRaised() {
+			public void onContinuedRaised() {
 				s = "";
 				
 			}
-
-
-			
 		};
 		
 		
@@ -188,23 +192,24 @@ public class Game extends JPanel implements ActionListener, KeyListener {
 		}
 
 		public void moveLeft() {
-			sm.raiseLeftButtonPressed();
+			sm.getSCILeftButton().raisePressed();
 			
 		}
 
 		public void moveRight() {
-			sm.raiseRightButtonPressed();
+			sm.getSCIRightButton().raisePressed();
 			
 		}
 
 		public void moveRocket(){
 			
 			sm.runCycle();
+			base.location = (int) sm.getSCIPlatform().getX();
 			//System.out.println(sm.getRocketY());
 		}
 		
 		public Shape getShape(){
-			return new Rectangle((int)sm.getRocketX(), (int)sm.getRocketY(), 10, 100);
+			return new Rectangle((int)sm.getSCIRocket().getX(), (int)sm.getSCIRocket().getY(), 10, 100);
 		}
 	}
 	
