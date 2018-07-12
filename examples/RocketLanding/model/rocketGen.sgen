@@ -13,4 +13,32 @@ GeneratorModel for yakindu::java::scenario {
 			InterfaceObserverSupport = true
 		}
 	}
+	
+	statechart RocketLanding1 {
+
+		feature Outlet {
+			targetProject = "RocketLanding"
+			targetFolder = "src-gen"
+			libraryTargetFolder = "src"
+		}
+		
+		feature GeneralFeatures {
+			TimerService = true
+			InterfaceObserverSupport = true
+		}
+	}
+	
+	statechart RocketLanding2 {
+
+		feature Outlet {
+			targetProject = "RocketLanding"
+			targetFolder = "src-gen"
+			libraryTargetFolder = "src"
+		}
+		
+		feature GeneralFeatures {
+			TimerService = true
+			InterfaceObserverSupport = true
+		}
+	}
 }
