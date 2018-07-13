@@ -40,5 +40,11 @@ GeneratorModel for yakindu::java::scenario {
 			TimerService = true
 			InterfaceObserverSupport = true
 		}
+		
+		feature RunnableWrapper {
+					namePrefix =  "" 
+					nameSuffix =  "Runnable" 
+		}
+						
 	}
 }
