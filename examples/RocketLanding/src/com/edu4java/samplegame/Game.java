@@ -1,12 +1,12 @@
 package com.edu4java.samplegame;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.beans.PropertyChangeListener;
 
-import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -39,17 +39,25 @@ public class Game extends JPanel implements KeyListener, ActionListener {
 		addKeyListener(this);
 		setFocusable(true);
 		setFocusTraversalKeysEnabled(false);
-
 		
-		this.buttonAutoPilot = new JButton("Enable Auto Pilot");
-	    this.buttonAutoPilot.addActionListener( new ActionListener() {
+		setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
+//		setLayout(null);
+		
+		Dimension smallButtonDimension = new Dimension(FRAME_WIDTH / 2 - 1, 35);
+		Dimension largeButtonDimension = new Dimension(FRAME_WIDTH , 35);
+		
+		this.buttonAutoPilot = new JButton("Auto Pilot");
+		this.buttonAutoPilot.setPreferredSize(smallButtonDimension);
+		this.buttonAutoPilot.setMargin(new Insets(10,10,10,10));
+		this.buttonAutoPilot.addActionListener( new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				sm.getSCIGame().raiseAutopilotPressed();
 			}
 		});
 
-		this.buttonHumanPilot = new JButton("Enable Manual Control");
+		this.buttonHumanPilot = new JButton("Manual Control");
+		this.buttonHumanPilot.setPreferredSize(smallButtonDimension);
 	    this.buttonHumanPilot.addActionListener( new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -58,6 +66,7 @@ public class Game extends JPanel implements KeyListener, ActionListener {
 		});
 
 	    this.buttonLeft = new JButton("< Left");
+	    this.buttonLeft.setPreferredSize(smallButtonDimension);
 	    this.buttonLeft.addActionListener( new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -66,6 +75,7 @@ public class Game extends JPanel implements KeyListener, ActionListener {
 		});
 
 		this.buttonRight = new JButton("Right >");
+		this.buttonRight.setPreferredSize(smallButtonDimension);
 	    this.buttonRight.addActionListener( new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -74,6 +84,7 @@ public class Game extends JPanel implements KeyListener, ActionListener {
 		});
 
 		this.buttonPauseUnpause = new JButton("Pause / Unpause");
+		this.buttonPauseUnpause.setPreferredSize(largeButtonDimension);
 	    this.buttonPauseUnpause.addActionListener( new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -214,7 +225,7 @@ public class Game extends JPanel implements KeyListener, ActionListener {
 		Game game = new Game();
 
 		frame.add(game);
-		frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
+		frame.setSize(FRAME_WIDTH, FRAME_HEIGHT+130);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
