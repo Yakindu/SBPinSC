@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_qQbi4Li9Eee0RvvjCgy_jA" specification="interface:&#xA;&#xA;&#x9;const deltaX : integer = 10&#xA;&#x9;const deltaY : integer = 1&#xA;&#xA;&#xA;interface rocket:&#xA;&#xA;&#x9;in event tryLower&#xA;&#x9;in event tryMoveRight&#xA;&#x9;in event tryMoveLeft&#xA;&#x9;&#xA;&#x9;var x : integer = 140&#xA;&#x9;var y : integer = 20&#xA;&#x9;var width : integer&#xA;&#x9;var height : integer&#xA;&#x9;&#xA;&#x9;&#xA;interface platform:&#xA;&#x9;in event touched&#xA;&#x9;var x : integer&#xA;&#xA;interface ground:&#xA;&#x9;in event touched&#xA;&#x9;var level : integer&#xA;&#x9;&#xA;interface leftWall:&#xA;&#x9;var x : integer&#xA;&#x9;&#xA;interface rightWall:&#xA;&#x9;var x : integer&#xA;&#x9;&#xA;&#xA;interface pilot:&#xA;&#x9;in event enable&#xA;&#x9;in event disable&#xA;&#x9;&#xA;interface rightButton:&#xA;&#x9;in event pressed&#xA;&#x9;&#xA;interface leftButton:&#xA;&#x9;in event pressed&#xA;&#x9;&#x9;&#xA;interface adversary:&#xA;&#x9;in event activate&#xA;&#x9;in event deactivate&#xA;&#x9;&#xA;interface game:&#xA;&#x9;var counter : integer&#xA;&#x9;in event pausePressed&#xA;&#x9;in event autopilotPressed&#xA;&#x9;out event countDown: integer&#xA;&#x9;out event overWon&#xA;&#x9;out event overLose&#xA;&#x9;out event paused&#xA;&#x9;out event continued&#xA;&#x9;&#xA;interface autopilot:&#xA;&#x9;in event enable&#xA;&#x9;in event disable" name="RocketLanding2" domainID="com.yakindu.domain.scenario">
+  <sgraph:Statechart xmi:id="_qQbi4Li9Eee0RvvjCgy_jA" specification="interface:&#xA;&#xA;&#x9;const deltaX : integer = 10&#xA;&#x9;const deltaY : integer = 1&#xA;interface rocket:&#xA;&#xA;&#x9;in event lower&#xA;&#x9;in event moveRight&#xA;&#x9;in event moveLeft&#xA;&#x9;&#xA;&#x9;var x : integer = 140&#xA;&#x9;var y : integer = 20&#xA;&#x9;var width : integer&#xA;&#x9;var height : integer&#xA;&#x9;&#xA;interface platform:&#xA;&#x9;in event touched&#xA;&#x9;var x : integer&#xA;&#xA;interface ground:&#xA;&#x9;in event touched&#xA;&#x9;var level : integer&#xA;&#xA;interface leftWall:&#xA;&#x9;var x : integer&#xA;&#xA;interface rightWall:&#xA;&#x9;var x : integer&#xA;&#xA;interface pilot:&#xA;&#x9;in event enable&#xA;&#x9;in event disable&#xA;&#xA;interface rightButton:&#xA;&#x9;in event pressed&#xA;&#xA;interface leftButton:&#xA;&#x9;in event pressed&#xA;&#xA;interface adversary:&#xA;&#x9;in event activate&#xA;&#x9;in event deactivate&#xA;&#xA;interface game:&#xA;&#x9;var counter : integer&#xA;&#x9;in event pausePressed&#xA;&#x9;in event autopilotPressed&#xA;&#x9;out event countDown: integer&#xA;&#x9;out event overWon&#xA;&#x9;out event overLose&#xA;&#x9;out event paused&#xA;&#x9;out event continued&#xA;&#xA;interface autopilot:&#xA;&#x9;in event enable&#xA;&#x9;in event disable&#xA;" name="RocketLanding2" domainID="com.yakindu.domain.scenario">
     <regions xmi:id="_uOW5kIXoEeiERPCbbCdcjg" name="HumanPilot">
       <vertices xsi:type="sgraph:Entry" xmi:id="_y5DuIIXoEeiERPCbbCdcjg">
         <outgoingTransitions xmi:id="_29yH0IXoEeiERPCbbCdcjg" specification="" target="_zYKsAIXoEeiERPCbbCdcjg"/>
@@ -11,22 +11,22 @@
       <vertices xsi:type="sgraph:State" xmi:id="_1EaycIXoEeiERPCbbCdcjg" specification="request pilot.disable" name="On" incomingTransitions="_4AvZoIXoEeiERPCbbCdcjg">
         <outgoingTransitions xmi:id="_HcG7cIXpEeiERPCbbCdcjg" specification="pilot.disable" target="_zYKsAIXoEeiERPCbbCdcjg"/>
         <regions xmi:id="_k0qBQLi-Eee0RvvjCgy_jA" name="LeftButtonSensor">
-          <vertices xsi:type="sgraph:State" xmi:id="_QcFzIL5EEeevQq-5BwDY8Q" specification="block rocket.tryMoveLeft" name="notPressed" incomingTransitions="_RqNzIL5EEeevQq-5BwDY8Q _UzUSEL5EEeevQq-5BwDY8Q">
+          <vertices xsi:type="sgraph:State" xmi:id="_QcFzIL5EEeevQq-5BwDY8Q" specification="block rocket.moveLeft" name="WaitForButtonPress" incomingTransitions="_RqNzIL5EEeevQq-5BwDY8Q _UzUSEL5EEeevQq-5BwDY8Q">
             <outgoingTransitions xmi:id="_SZ8m8L5EEeevQq-5BwDY8Q" specification="leftButton.pressed" target="_SZ3ucL5EEeevQq-5BwDY8Q"/>
           </vertices>
           <vertices xsi:type="sgraph:Entry" xmi:id="_RZvHIL5EEeevQq-5BwDY8Q">
             <outgoingTransitions xmi:id="_RqNzIL5EEeevQq-5BwDY8Q" specification="" target="_QcFzIL5EEeevQq-5BwDY8Q"/>
           </vertices>
-          <vertices xsi:type="sgraph:State" xmi:id="_SZ3ucL5EEeevQq-5BwDY8Q" specification="" name="pressed" incomingTransitions="_SZ8m8L5EEeevQq-5BwDY8Q">
-            <outgoingTransitions xmi:id="_UzUSEL5EEeevQq-5BwDY8Q" specification="rocket.tryMoveLeft" target="_QcFzIL5EEeevQq-5BwDY8Q"/>
+          <vertices xsi:type="sgraph:State" xmi:id="_SZ3ucL5EEeevQq-5BwDY8Q" specification="" name="TryMoveRocketLeft" incomingTransitions="_SZ8m8L5EEeevQq-5BwDY8Q">
+            <outgoingTransitions xmi:id="_UzUSEL5EEeevQq-5BwDY8Q" specification="rocket.moveLeft" target="_QcFzIL5EEeevQq-5BwDY8Q"/>
           </vertices>
         </regions>
         <regions xmi:id="_eeL1IM68EeeCzMV7JlytIg" name="RightButtonSensor">
-          <vertices xsi:type="sgraph:State" xmi:id="_evH0IM68EeeCzMV7JlytIg" specification="block rocket.tryMoveRight" name="notPressed" incomingTransitions="_Rcm4YM7AEeeCzMV7JlytIg _3TC5EM7AEeeCzMV7JlytIg">
+          <vertices xsi:type="sgraph:State" xmi:id="_evH0IM68EeeCzMV7JlytIg" specification="block rocket.moveRight" name="WaitForButtonPress" incomingTransitions="_Rcm4YM7AEeeCzMV7JlytIg _3TC5EM7AEeeCzMV7JlytIg">
             <outgoingTransitions xmi:id="_Q3_vcM7AEeeCzMV7JlytIg" specification="rightButton.pressed" target="_OBbyAM7AEeeCzMV7JlytIg"/>
           </vertices>
-          <vertices xsi:type="sgraph:State" xmi:id="_OBbyAM7AEeeCzMV7JlytIg" specification="" name="pressed" incomingTransitions="_Q3_vcM7AEeeCzMV7JlytIg">
-            <outgoingTransitions xmi:id="_Rcm4YM7AEeeCzMV7JlytIg" specification="rocket.tryMoveRight" target="_evH0IM68EeeCzMV7JlytIg"/>
+          <vertices xsi:type="sgraph:State" xmi:id="_OBbyAM7AEeeCzMV7JlytIg" specification="" name="TryMoveRocketRight" incomingTransitions="_Q3_vcM7AEeeCzMV7JlytIg">
+            <outgoingTransitions xmi:id="_Rcm4YM7AEeeCzMV7JlytIg" specification="rocket.moveRight" target="_evH0IM68EeeCzMV7JlytIg"/>
           </vertices>
           <vertices xsi:type="sgraph:Entry" xmi:id="_1ObV8M7AEeeCzMV7JlytIg">
             <outgoingTransitions xmi:id="_3TC5EM7AEeeCzMV7JlytIg" specification="" target="_evH0IM68EeeCzMV7JlytIg"/>
@@ -47,15 +47,15 @@
           <vertices xsi:type="sgraph:Entry" xmi:id="_dhw9QYXkEeiERPCbbCdcjg">
             <outgoingTransitions xmi:id="_dhw9QoXkEeiERPCbbCdcjg" specification="" target="_dhw9Q4XkEeiERPCbbCdcjg"/>
           </vertices>
-          <vertices xsi:type="sgraph:State" xmi:id="_dhw9Q4XkEeiERPCbbCdcjg" specification="block &#xA;  rocket.tryMoveLeft, &#xA;  rocket.tryMoveRight" name="NoMove" incomingTransitions="_dhw9QoXkEeiERPCbbCdcjg _BbtUsIXoEeiERPCbbCdcjg _jwwOEIXvEeiERPCbbCdcjg">
+          <vertices xsi:type="sgraph:State" xmi:id="_dhw9Q4XkEeiERPCbbCdcjg" specification="block &#xA;  rocket.moveLeft, &#xA;  rocket.moveRight" name="NoMove" incomingTransitions="_dhw9QoXkEeiERPCbbCdcjg _BbtUsIXoEeiERPCbbCdcjg _jwwOEIXvEeiERPCbbCdcjg">
             <outgoingTransitions xmi:id="_zm1W8IXkEeiERPCbbCdcjg" specification="[rocket.x &lt; platform.x]" target="_jJQKMIXkEeiERPCbbCdcjg"/>
             <outgoingTransitions xmi:id="_C7_jEIXlEeiERPCbbCdcjg" specification="[rocket.x > platform.x]" target="_nBpYEIXkEeiERPCbbCdcjg"/>
           </vertices>
-          <vertices xsi:type="sgraph:State" xmi:id="_jJQKMIXkEeiERPCbbCdcjg" specification="block&#xA;  rocket.tryMoveLeft&#xA;request &#xA;  rocket.tryMoveRight&#xA; " name="ToRight" incomingTransitions="_zm1W8IXkEeiERPCbbCdcjg">
-            <outgoingTransitions xmi:id="_jwwOEIXvEeiERPCbbCdcjg" specification="rocket.tryMoveRight" target="_dhw9Q4XkEeiERPCbbCdcjg"/>
+          <vertices xsi:type="sgraph:State" xmi:id="_jJQKMIXkEeiERPCbbCdcjg" specification="block&#xA;  rocket.moveLeft&#xA;request &#xA;  rocket.moveRight&#xA; " name="ToRight" incomingTransitions="_zm1W8IXkEeiERPCbbCdcjg">
+            <outgoingTransitions xmi:id="_jwwOEIXvEeiERPCbbCdcjg" specification="rocket.moveRight" target="_dhw9Q4XkEeiERPCbbCdcjg"/>
           </vertices>
-          <vertices xsi:type="sgraph:State" xmi:id="_nBpYEIXkEeiERPCbbCdcjg" specification="block&#xA;  rocket.tryMoveRight&#xA;request &#xA;  rocket.tryMoveLeft" name="ToLeft" incomingTransitions="_C7_jEIXlEeiERPCbbCdcjg">
-            <outgoingTransitions xmi:id="_BbtUsIXoEeiERPCbbCdcjg" specification="rocket.tryMoveLeft" target="_dhw9Q4XkEeiERPCbbCdcjg"/>
+          <vertices xsi:type="sgraph:State" xmi:id="_nBpYEIXkEeiERPCbbCdcjg" specification="block&#xA;  rocket.moveRight&#xA;request &#xA;  rocket.moveLeft" name="ToLeft" incomingTransitions="_C7_jEIXlEeiERPCbbCdcjg">
+            <outgoingTransitions xmi:id="_BbtUsIXoEeiERPCbbCdcjg" specification="rocket.moveLeft" target="_dhw9Q4XkEeiERPCbbCdcjg"/>
           </vertices>
         </regions>
       </vertices>
@@ -69,13 +69,13 @@
           <vertices xsi:type="sgraph:Entry" xmi:id="_6d_jYYXhEeiERPCbbCdcjg" kind="SHALLOW_HISTORY">
             <outgoingTransitions xmi:id="_6d_jYoXhEeiERPCbbCdcjg" specification="" target="_6eAKcIXhEeiERPCbbCdcjg"/>
           </vertices>
-          <vertices xsi:type="sgraph:State" xmi:id="_6eAKcIXhEeiERPCbbCdcjg" specification="block adversary.deactivate" name="ActiveAdversary" incomingTransitions="_6d_jYoXhEeiERPCbbCdcjg">
+          <vertices xsi:type="sgraph:State" xmi:id="_6eAKcIXhEeiERPCbbCdcjg" specification="block  adversary.deactivate" name="ActiveAdversary" incomingTransitions="_6d_jYoXhEeiERPCbbCdcjg">
             <outgoingTransitions xmi:id="_WLNRUIXiEeiERPCbbCdcjg" specification="always [rocket.y > ground.level - 40]" target="_LgpMEIXiEeiERPCbbCdcjg"/>
           </vertices>
           <vertices xsi:type="sgraph:State" xmi:id="_LgpMEIXiEeiERPCbbCdcjg" specification="block adversary.activate" name="IdleAdversary" incomingTransitions="_WLNRUIXiEeiERPCbbCdcjg"/>
         </regions>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_yfunAIUKEeiW7IrCLL_hZA" specification="block &#xA;&#x9;rocket.tryLower, rocket.tryMoveRight, rocket.tryMoveLeft,&#xA;&#x9;platform.touched,&#xA;&#x9;ground.touched,&#xA;&#x9;adversary.activate" name="Inactive" incomingTransitions="_DbSZHsnmEeeLPrzk95dIbg">
+      <vertices xsi:type="sgraph:State" xmi:id="_yfunAIUKEeiW7IrCLL_hZA" specification="block &#xA;&#x9;rocket.lower, rocket.moveRight, rocket.moveLeft,&#xA;&#x9;platform.touched,&#xA;&#x9;ground.touched,&#xA;&#x9;adversary.activate" name="Inactive" incomingTransitions="_DbSZHsnmEeeLPrzk95dIbg">
         <regions xmi:id="_yfunA4UKEeiW7IrCLL_hZA" name="r">
           <vertices xsi:type="sgraph:State" xmi:id="_awkU8IUIEeiW7IrCLL_hZA" specification="entry / game.counter = 10&#xA;every 500 ms / &#xA;&#x9;game.counter -= 1; &#xA;&#x9;raise game.countDown:game.counter" name="CountDown" incomingTransitions="_INRSMIZjEeiERPCbbCdcjg">
             <outgoingTransitions xmi:id="_Hcz6YIUKEeiW7IrCLL_hZA" specification="[game.counter == 0]" target="_C5GeoIUKEeiW7IrCLL_hZA"/>
@@ -100,13 +100,13 @@
     </regions>
     <regions xmi:id="_lUM-B8oXEeeCpYM8ZmA-Tg" name="Gravity">
       <vertices xsi:type="sgraph:State" xmi:id="_lUQBUMoXEeeCpYM8ZmA-Tg" specification="" name="gravity" incomingTransitions="_lUOzN8oXEeeCpYM8ZmA-Tg _lUOzMsoXEeeCpYM8ZmA-Tg">
-        <outgoingTransitions xmi:id="_lUQoYsoXEeeCpYM8ZmA-Tg" specification="after 5 ms" target="_lUNlHMoXEeeCpYM8ZmA-Tg"/>
+        <outgoingTransitions xmi:id="_lUQoYsoXEeeCpYM8ZmA-Tg" specification="after &#xA;  5 ms" target="_lUNlHMoXEeeCpYM8ZmA-Tg"/>
       </vertices>
       <vertices xsi:type="sgraph:Entry" xmi:id="_lUOzMcoXEeeCpYM8ZmA-Tg">
         <outgoingTransitions xmi:id="_lUOzN8oXEeeCpYM8ZmA-Tg" specification="" target="_lUQBUMoXEeeCpYM8ZmA-Tg"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_lUNlHMoXEeeCpYM8ZmA-Tg" specification="request &#xA;  rocket.tryLower" name="pullRocket" incomingTransitions="_lUQoYsoXEeeCpYM8ZmA-Tg">
-        <outgoingTransitions xmi:id="_lUOzMsoXEeeCpYM8ZmA-Tg" specification="always" target="_lUQBUMoXEeeCpYM8ZmA-Tg"/>
+      <vertices xsi:type="sgraph:State" xmi:id="_lUNlHMoXEeeCpYM8ZmA-Tg" specification="request &#xA;  rocket.lower" name="pullRocket" incomingTransitions="_lUQoYsoXEeeCpYM8ZmA-Tg">
+        <outgoingTransitions xmi:id="_lUOzMsoXEeeCpYM8ZmA-Tg" specification="always" documentation="upon &#xA;any &#xA;event" target="_lUQBUMoXEeeCpYM8ZmA-Tg"/>
       </vertices>
     </regions>
     <regions xmi:id="_51pSUM64EeeCzMV7JlytIg" name="RightWall">
@@ -116,7 +116,7 @@
       <vertices xsi:type="sgraph:State" xmi:id="_j4ZtAM66EeeCzMV7JlytIg" specification="" name="notTouchingWall" incomingTransitions="_pUIV4M66EeeCzMV7JlytIg _tGhCYM66EeeCzMV7JlytIg">
         <outgoingTransitions xmi:id="_lS240M66EeeCzMV7JlytIg" specification="[rocket.x + rocket.width &#xD;&#xA;&#x9;== rightWall.x]" target="_lSzOcM66EeeCzMV7JlytIg"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_lSzOcM66EeeCzMV7JlytIg" specification="block &#xA;  rocket.tryMoveRight" name="touchingWall" incomingTransitions="_lS240M66EeeCzMV7JlytIg">
+      <vertices xsi:type="sgraph:State" xmi:id="_lSzOcM66EeeCzMV7JlytIg" specification="block &#xA;  rocket.moveRight" name="touchingWall" incomingTransitions="_lS240M66EeeCzMV7JlytIg">
         <outgoingTransitions xmi:id="_pUIV4M66EeeCzMV7JlytIg" specification="[rocket.x + rocket.width &#xA;&#x9;&lt; rightWall.x]" target="_j4ZtAM66EeeCzMV7JlytIg"/>
       </vertices>
     </regions>
@@ -127,7 +127,7 @@
       <vertices xsi:type="sgraph:State" xmi:id="_3hg6ALljEee0RvvjCgy_jA" name="notTouchingWall" incomingTransitions="_3hg6D7ljEee0RvvjCgy_jA _pFvOAL12Eeeb3PvqGwMXvQ">
         <outgoingTransitions xmi:id="_oCPwsL12Eeeb3PvqGwMXvQ" specification="[rocket.x == leftWall.x]" target="_kb-NkL12Eeeb3PvqGwMXvQ"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_kb-NkL12Eeeb3PvqGwMXvQ" specification="block &#xA;  rocket.tryMoveLeft" name="touchingLeftWall" incomingTransitions="_oCPwsL12Eeeb3PvqGwMXvQ">
+      <vertices xsi:type="sgraph:State" xmi:id="_kb-NkL12Eeeb3PvqGwMXvQ" specification="block &#xA;  rocket.moveLeft" name="touchingLeftWall" incomingTransitions="_oCPwsL12Eeeb3PvqGwMXvQ">
         <outgoingTransitions xmi:id="_pFvOAL12Eeeb3PvqGwMXvQ" specification="[rocket.x > leftWall.x]" target="_3hg6ALljEee0RvvjCgy_jA"/>
       </vertices>
     </regions>
@@ -136,9 +136,9 @@
         <outgoingTransitions xmi:id="_Uw1KgLl9EeeE6IK0AfwnoA" specification="" target="_zc4nMLjEEee0RvvjCgy_jA"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_zc4nMLjEEee0RvvjCgy_jA" specification="" name="Landing" incomingTransitions="_Uw1KgLl9EeeE6IK0AfwnoA">
-        <outgoingTransitions xmi:id="_rdEJ4Mh7EeeFz9Yjn8PS_w" specification="[rocket.height + rocket.y &#xD;&#xA;== ground.level]" target="_q2aZkMh7EeeFz9Yjn8PS_w"/>
+        <outgoingTransitions xmi:id="_rdEJ4Mh7EeeFz9Yjn8PS_w" specification="[rocket.height + rocket.y &#xD;&#xA;>= ground.level]" target="_q2aZkMh7EeeFz9Yjn8PS_w"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_oLpccMh7EeeFz9Yjn8PS_w" specification="&#xD;&#xA;block &#xD;&#xA;  rocket.tryMoveLeft, &#xD;&#xA;  rocket.tryMoveRight, &#xD;&#xA;  rocket.tryLower" name="TouchedGround">
+      <vertices xsi:type="sgraph:State" xmi:id="_oLpccMh7EeeFz9Yjn8PS_w" specification="&#xD;&#xA;block &#xD;&#xA;  rocket.moveLeft, &#xD;&#xA;  rocket.moveRight, &#xD;&#xA;  rocket.lower" name="TouchedGround">
         <regions xmi:id="_qht78Mh7EeeFz9Yjn8PS_w" name="r1">
           <vertices xsi:type="sgraph:State" xmi:id="_w1-IQMh7EeeFz9Yjn8PS_w" specification="request ground.touched" name="Crashed" incomingTransitions="_w2H5QMh7EeeFz9Yjn8PS_w"/>
           <vertices xsi:type="sgraph:State" xmi:id="_y6iBAMh7EeeFz9Yjn8PS_w" specification="request platform.touched" name="Landed" incomingTransitions="_2NCTkMh7EeeFz9Yjn8PS_w"/>
@@ -156,20 +156,20 @@
             <outgoingTransitions xmi:id="_MBGSkMI2EeevQq-5BwDY8Q" target="_MBDPQMI2EeevQq-5BwDY8Q"/>
           </vertices>
           <vertices xsi:type="sgraph:State" xmi:id="_MBDPQMI2EeevQq-5BwDY8Q" name="acting" incomingTransitions="_MBGSkMI2EeevQq-5BwDY8Q _RzqHEMI2EeevQq-5BwDY8Q">
-            <outgoingTransitions xmi:id="_RzqHEMI2EeevQq-5BwDY8Q" specification="rocket.tryLower / &#xA;rocket.y += deltaY" target="_MBDPQMI2EeevQq-5BwDY8Q"/>
+            <outgoingTransitions xmi:id="_RzqHEMI2EeevQq-5BwDY8Q" specification="rocket.lower / rocket.y += deltaY" target="_MBDPQMI2EeevQq-5BwDY8Q"/>
           </vertices>
         </regions>
         <regions xmi:id="_J3kaQMI2EeevQq-5BwDY8Q" name="MoveLeftActuator">
-          <vertices xsi:type="sgraph:State" xmi:id="_hZjboMLrEeevQq-5BwDY8Q" specification="request &#xA;rocket.tryMoveLeft" name="acting" incomingTransitions="_oFB1IMLrEeevQq-5BwDY8Q _1yZkEMLrEeevQq-5BwDY8Q">
-            <outgoingTransitions xmi:id="_oFB1IMLrEeevQq-5BwDY8Q" specification="rocket.tryMoveLeft / &#xA;rocket.x -= deltaX" target="_hZjboMLrEeevQq-5BwDY8Q"/>
+          <vertices xsi:type="sgraph:State" xmi:id="_hZjboMLrEeevQq-5BwDY8Q" specification="request &#xA;rocket.moveLeft" name="acting" incomingTransitions="_oFB1IMLrEeevQq-5BwDY8Q _1yZkEMLrEeevQq-5BwDY8Q">
+            <outgoingTransitions xmi:id="_oFB1IMLrEeevQq-5BwDY8Q" specification="rocket.moveLeft / rocket.x -= deltaX" target="_hZjboMLrEeevQq-5BwDY8Q"/>
           </vertices>
           <vertices xsi:type="sgraph:Entry" xmi:id="_1d3egMLrEeevQq-5BwDY8Q">
             <outgoingTransitions xmi:id="_1yZkEMLrEeevQq-5BwDY8Q" specification="" target="_hZjboMLrEeevQq-5BwDY8Q"/>
           </vertices>
         </regions>
         <regions xmi:id="_tylYYMLsEeevQq-5BwDY8Q" name="MoveRightActuator">
-          <vertices xsi:type="sgraph:State" xmi:id="_v_ps4MLsEeevQq-5BwDY8Q" specification="request&#xA;rocket.tryMoveRight" name="acting" incomingTransitions="_xUuCYMLsEeevQq-5BwDY8Q _mvsVI864EeeCzMV7JlytIg">
-            <outgoingTransitions xmi:id="_mvsVI864EeeCzMV7JlytIg" specification="rocket.tryMoveRight / &#xA;rocket.x += deltaX" target="_v_ps4MLsEeevQq-5BwDY8Q"/>
+          <vertices xsi:type="sgraph:State" xmi:id="_v_ps4MLsEeevQq-5BwDY8Q" specification="request&#xA;rocket.moveRight" name="acting" incomingTransitions="_xUuCYMLsEeevQq-5BwDY8Q _mvsVI864EeeCzMV7JlytIg">
+            <outgoingTransitions xmi:id="_mvsVI864EeeCzMV7JlytIg" specification="rocket.moveRight / rocket.x += deltaX" target="_v_ps4MLsEeevQq-5BwDY8Q"/>
           </vertices>
           <vertices xsi:type="sgraph:Entry" xmi:id="_w77H4MLsEeevQq-5BwDY8Q">
             <outgoingTransitions xmi:id="_xUuCYMLsEeevQq-5BwDY8Q" specification="" target="_v_ps4MLsEeevQq-5BwDY8Q"/>
@@ -191,7 +191,7 @@
             <outgoingTransitions xmi:id="_VumXQIUFEeiW7IrCLL_hZA" specification="after 2s " target="_m4Q40IUDEeiW7IrCLL_hZA"/>
           </vertices>
           <vertices xsi:type="sgraph:State" xmi:id="_qZ7BsIUDEeiW7IrCLL_hZA" specification="every 500ms &#xA;[platform.x+deltaX&lt; rightWall.x]&#xA;/ platform.x += deltaX" name="movePlatformRight" incomingTransitions="_umX0AIUDEeiW7IrCLL_hZA _mHSeIIUfEeiERPCbbCdcjg">
-            <outgoingTransitions xmi:id="_JitCIIUFEeiW7IrCLL_hZA" specification="after 2 s" target="_Jim7gIUFEeiW7IrCLL_hZA"/>
+            <outgoingTransitions xmi:id="_JitCIIUFEeiW7IrCLL_hZA" specification="after 2s" target="_Jim7gIUFEeiW7IrCLL_hZA"/>
           </vertices>
           <vertices xsi:type="sgraph:State" xmi:id="_m4Q40IUDEeiW7IrCLL_hZA" name="Waiting" incomingTransitions="_VumXQIUFEeiW7IrCLL_hZA">
             <outgoingTransitions xmi:id="_umX0AIUDEeiW7IrCLL_hZA" specification="after 1s" target="_qZ7BsIUDEeiW7IrCLL_hZA"/>
@@ -212,7 +212,7 @@
       <vertices xsi:type="sgraph:State" xmi:id="_xqvEYIXpEeiERPCbbCdcjg" specification="block &#xA;pilot.enable,&#xA;autopilot.disable" name="Autopilot" incomingTransitions="_VZlVYIYJEeiERPCbbCdcjg">
         <outgoingTransitions xmi:id="_3BvlUIXpEeiERPCbbCdcjg" specification="game.autopilotPressed" target="_c4aecIYJEeiERPCbbCdcjg"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_34wxQIYHEeiERPCbbCdcjg" specification="block&#xA;  rocket.tryMoveRight,&#xA;  rocket.tryMoveLeft" name="SwithPilots">
+      <vertices xsi:type="sgraph:State" xmi:id="_34wxQIYHEeiERPCbbCdcjg" specification="block&#xA;  rocket.moveRight,&#xA;  rocket.moveLeft" name="SwithPilots">
         <regions xmi:id="_t1guMIYIEeiERPCbbCdcjg" name="r">
           <vertices xsi:type="sgraph:State" xmi:id="_t1guM4YIEeiERPCbbCdcjg" specification="block&#xA;  autopilot.enable&#xA;request&#xA;  pilot.disable" name="DeactivatePilot" incomingTransitions="_CVS9MIXqEeiERPCbbCdcjg">
             <outgoingTransitions xmi:id="_chXF0IYIEeiERPCbbCdcjg" specification="pilot.disable" target="_BhIkQIYJEeiERPCbbCdcjg"/>
@@ -1163,7 +1163,7 @@
           </children>
           <styles xsi:type="notation:ShapeStyle" xmi:id="_y5EVMYXoEeiERPCbbCdcjg" fontName="Verdana" fillColor="0" lineColor="16777215"/>
           <styles xsi:type="notation:NamedStyle" xmi:id="_y5EVMoXoEeiERPCbbCdcjg" name="allowColors"/>
-          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_y5EVM4XoEeiERPCbbCdcjg" x="213" y="22"/>
+          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_y5EVM4XoEeiERPCbbCdcjg" x="213" y="22" width="15" height="15"/>
         </children>
         <children xmi:id="_zYL6IIXoEeiERPCbbCdcjg" type="State" element="_zYKsAIXoEeiERPCbbCdcjg">
           <children xsi:type="notation:DecorationNode" xmi:id="_zYL6JIXoEeiERPCbbCdcjg" type="StateName">
@@ -1179,7 +1179,7 @@
           <styles xsi:type="notation:ShapeStyle" xmi:id="_zYL6IYXoEeiERPCbbCdcjg" fontName="Verdana" fillColor="15981773" lineColor="12632256"/>
           <styles xsi:type="notation:FontStyle" xmi:id="_zYL6IoXoEeiERPCbbCdcjg"/>
           <styles xsi:type="notation:BooleanValueStyle" xmi:id="_zYL6K4XoEeiERPCbbCdcjg" name="isHorizontal" booleanValue="true"/>
-          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_zYL6I4XoEeiERPCbbCdcjg" x="9" y="6" width="150"/>
+          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_zYL6I4XoEeiERPCbbCdcjg" x="9" y="6" width="150" height="53"/>
         </children>
         <children xmi:id="_1EcAkIXoEeiERPCbbCdcjg" type="State" element="_1EaycIXoEeiERPCbbCdcjg">
           <children xsi:type="notation:DecorationNode" xmi:id="_1EcAlIXoEeiERPCbbCdcjg" type="StateName">
@@ -1228,7 +1228,7 @@
                   <styles xsi:type="notation:ShapeStyle" xmi:id="_OBbyBM7AEeeCzMV7JlytIg" fontName="Verdana" fillColor="15981773" lineColor="12632256"/>
                   <styles xsi:type="notation:FontStyle" xmi:id="_OBbyBc7AEeeCzMV7JlytIg"/>
                   <styles xsi:type="notation:BooleanValueStyle" xmi:id="_OBbyDs7AEeeCzMV7JlytIg" name="isHorizontal" booleanValue="true"/>
-                  <layoutConstraint xsi:type="notation:Bounds" xmi:id="_OBbyBs7AEeeCzMV7JlytIg" x="1" y="24" width="54"/>
+                  <layoutConstraint xsi:type="notation:Bounds" xmi:id="_OBbyBs7AEeeCzMV7JlytIg" x="1" y="24" width="110"/>
                 </children>
                 <children xmi:id="_1Okf4M7AEeeCzMV7JlytIg" type="Entry" element="_1ObV8M7AEeeCzMV7JlytIg">
                   <children xmi:id="_1Okf5M7AEeeCzMV7JlytIg" type="BorderItemLabelContainer">
@@ -1499,7 +1499,7 @@
     <edges xmi:id="_lUQBU8oXEeeCpYM8ZmA-Tg" type="Transition" element="_lUQoYsoXEeeCpYM8ZmA-Tg" source="_lUPaQMoXEeeCpYM8ZmA-Tg" target="_lUNlEMoXEeeCpYM8ZmA-Tg">
       <children xsi:type="notation:DecorationNode" xmi:id="_lUQBV8oXEeeCpYM8ZmA-Tg" type="TransitionExpression">
         <styles xsi:type="notation:ShapeStyle" xmi:id="_lUQoYcoXEeeCpYM8ZmA-Tg"/>
-        <layoutConstraint xsi:type="notation:Location" xmi:id="_lUQoYMoXEeeCpYM8ZmA-Tg" x="-22" y="25"/>
+        <layoutConstraint xsi:type="notation:Location" xmi:id="_lUQoYMoXEeeCpYM8ZmA-Tg" x="-1" y="21"/>
       </children>
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_lUQBVsoXEeeCpYM8ZmA-Tg" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_lUQBVcoXEeeCpYM8ZmA-Tg" fontName="Verdana"/>
@@ -1510,10 +1510,11 @@
     <edges xmi:id="_lUPaVMoXEeeCpYM8ZmA-Tg" type="Transition" element="_lUOzMsoXEeeCpYM8ZmA-Tg" source="_lUNlEMoXEeeCpYM8ZmA-Tg" target="_lUPaQMoXEeeCpYM8ZmA-Tg">
       <children xsi:type="notation:DecorationNode" xmi:id="_lUPaVcoXEeeCpYM8ZmA-Tg" type="TransitionExpression">
         <styles xsi:type="notation:ShapeStyle" xmi:id="_lUPaWsoXEeeCpYM8ZmA-Tg"/>
-        <layoutConstraint xsi:type="notation:Location" xmi:id="_lUPaW8oXEeeCpYM8ZmA-Tg" x="-19" y="19"/>
+        <layoutConstraint xsi:type="notation:Location" xmi:id="_lUPaW8oXEeeCpYM8ZmA-Tg" x="4" y="-15"/>
       </children>
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_lUPaVsoXEeeCpYM8ZmA-Tg" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_lUPaV8oXEeeCpYM8ZmA-Tg" fontName="Verdana"/>
+      <styles xsi:type="notation:StringValueStyle" xmi:id="_J0LZ0IvuEeiVpagrCPJ5YQ" name="featureToShow" stringValue="documentation"/>
       <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_lUPaWMoXEeeCpYM8ZmA-Tg" points="[-38, -6, -18, 82]$[-38, -64, -18, 24]"/>
       <sourceAnchor xsi:type="notation:IdentityAnchor" xmi:id="_lUPaWcoXEeeCpYM8ZmA-Tg" id="(0.5927893738140417,0.1320754716981132)"/>
       <targetAnchor xsi:type="notation:IdentityAnchor" xmi:id="_P4iR4IT8EeiW7IrCLL_hZA" id="(0.3910891089108911,0.5)"/>
@@ -1554,7 +1555,7 @@
     <edges xmi:id="_SZ91EL5EEeevQq-5BwDY8Q" type="Transition" element="_SZ8m8L5EEeevQq-5BwDY8Q" source="_QcIPYL5EEeevQq-5BwDY8Q" target="_SZ48kL5EEeevQq-5BwDY8Q">
       <children xsi:type="notation:DecorationNode" xmi:id="_SZ91FL5EEeevQq-5BwDY8Q" type="TransitionExpression">
         <styles xsi:type="notation:ShapeStyle" xmi:id="_SZ91Fb5EEeevQq-5BwDY8Q"/>
-        <layoutConstraint xsi:type="notation:Location" xmi:id="_SZ91Fr5EEeevQq-5BwDY8Q" x="-12" y="-10"/>
+        <layoutConstraint xsi:type="notation:Location" xmi:id="_SZ91Fr5EEeevQq-5BwDY8Q" x="-14" y="-10"/>
       </children>
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_SZ91Eb5EEeevQq-5BwDY8Q" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_SZ91E75EEeevQq-5BwDY8Q" fontName="Verdana"/>
@@ -1565,7 +1566,7 @@
     <edges xmi:id="_UzVgML5EEeevQq-5BwDY8Q" type="Transition" element="_UzUSEL5EEeevQq-5BwDY8Q" source="_SZ48kL5EEeevQq-5BwDY8Q" target="_QcIPYL5EEeevQq-5BwDY8Q">
       <children xsi:type="notation:DecorationNode" xmi:id="_UzWHQL5EEeevQq-5BwDY8Q" type="TransitionExpression">
         <styles xsi:type="notation:ShapeStyle" xmi:id="_UzWHQb5EEeevQq-5BwDY8Q"/>
-        <layoutConstraint xsi:type="notation:Location" xmi:id="_UzWHQr5EEeevQq-5BwDY8Q" x="-17" y="11"/>
+        <layoutConstraint xsi:type="notation:Location" xmi:id="_UzWHQr5EEeevQq-5BwDY8Q" x="10" y="7"/>
       </children>
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_UzVgMb5EEeevQq-5BwDY8Q" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_UzVgM75EEeevQq-5BwDY8Q" fontName="Verdana"/>
@@ -1736,12 +1737,12 @@
       <styles xsi:type="notation:FontStyle" xmi:id="_Q3_vdM7AEeeCzMV7JlytIg" fontName="Verdana"/>
       <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_Q3_vc87AEeeCzMV7JlytIg" points="[-191, -4, -69, -37]$[-283, -4, -161, -37]$[-283, 33, -161, 0]"/>
       <sourceAnchor xsi:type="notation:IdentityAnchor" xmi:id="_Q3_veM7AEeeCzMV7JlytIg" id="(1.3401335506598664,0.5471698113207547)"/>
-      <targetAnchor xsi:type="notation:IdentityAnchor" xmi:id="_Q3_vec7AEeeCzMV7JlytIg" id="(3.4631238634067487,0.0)"/>
+      <targetAnchor xsi:type="notation:IdentityAnchor" xmi:id="_Q3_vec7AEeeCzMV7JlytIg" id="(1.616124469589816,0.0)"/>
     </edges>
     <edges xmi:id="_RcnfcM7AEeeCzMV7JlytIg" type="Transition" element="_Rcm4YM7AEeeCzMV7JlytIg" source="_OBbyA87AEeeCzMV7JlytIg" target="_evH0I868EeeCzMV7JlytIg">
       <children xsi:type="notation:DecorationNode" xmi:id="_RcnfdM7AEeeCzMV7JlytIg" type="TransitionExpression">
         <styles xsi:type="notation:ShapeStyle" xmi:id="_Rcnfdc7AEeeCzMV7JlytIg"/>
-        <layoutConstraint xsi:type="notation:Location" xmi:id="_Rcnfds7AEeeCzMV7JlytIg" x="-23" y="9"/>
+        <layoutConstraint xsi:type="notation:Location" xmi:id="_Rcnfds7AEeeCzMV7JlytIg" x="15" y="16"/>
       </children>
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_Rcnfcc7AEeeCzMV7JlytIg" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_Rcnfc87AEeeCzMV7JlytIg" fontName="Verdana"/>
