@@ -215,7 +215,8 @@ public class Game extends JPanel implements KeyListener, ActionListener {
 		frame.setSize(FRAME_WIDTH, FRAME_HEIGHT+130);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+		Thread.sleep(1000);
+		
 		while (true) {
 			game.moveRocket();
 			game.repaint();
