@@ -1,5 +1,6 @@
 package com.edu4java.samplegame;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.Shape;
@@ -12,7 +13,10 @@ class Wall extends GameAsset {
 
 	private List<Shape> shapes;
 
-	public Wall(int location){
+	public Wall(int location, int screenYOffset){
+		
+		super(screenYOffset);
+		
 		this.bounds.x = location;
 		this.shapes = new ArrayList<>();
 		createGrid();
@@ -25,6 +29,7 @@ class Wall extends GameAsset {
 
 	@Override
 	public void paint(Graphics2D g2d) {
+		g2d.setColor(Color.DARK_GRAY);
 		g2d.translate(bounds.x, 10);
 		// left upright
 		g2d.fill(new Rectangle(0, 0, 2, HEIGHT));

@@ -12,9 +12,9 @@ class Rocket extends GameAsset {
 
 	private Image image;
 
-	public Rocket(Rectangle bounds){
+	public Rocket(Rectangle bounds, int screenYOffset){
 
-		super();
+		super(screenYOffset);
 		
 		this.bounds.setBounds(bounds);
 		
@@ -29,9 +29,12 @@ class Rocket extends GameAsset {
 	
 	@Override
 	public void paint(Graphics2D g2d) {
+		Rectangle screenBounds = getScreenBounds(); 
 		g2d.drawImage(this.image,
-				bounds.x, bounds.y,
-				bounds.x + bounds.width, bounds.y + bounds.height,
+				screenBounds.x, 
+				screenBounds.y - screenBounds.height,
+				screenBounds.x + screenBounds.width, 
+				screenBounds.y,
 				0, 0,
 				this.image.getWidth(null), this.image.getHeight(null),
 				null);

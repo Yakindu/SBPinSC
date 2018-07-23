@@ -61,7 +61,7 @@ public class Game extends JPanel implements KeyListener, ActionListener {
 	    this.buttonHumanPilot.addActionListener( new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				sm.getSCIGame().raiseAutopilotPressed();
+				sm.getSCIGame().raiseManualControlPressed();
 			}
 		});
 
@@ -116,6 +116,8 @@ public class Game extends JPanel implements KeyListener, ActionListener {
 		sm.getSCIRocket().setHeight(scene.rocket.getBounds().height);
 		sm.getSCIGround().setLevel(scene.ground.getBounds().y);
 		sm.getSCIPlatform().setX(scene.platform.getBounds().x);
+		sm.getSCIPlatform().setWidth(scene.platform.getBounds().width);
+		
 		
 		sm.getSCIGame().getListeners().add(myStateMachineEventListener);
 		sm.enter();
@@ -133,19 +135,23 @@ public class Game extends JPanel implements KeyListener, ActionListener {
 	public void keyPressed(KeyEvent e){
 		int code = e.getKeyCode();
 		if (code == KeyEvent.VK_RIGHT){
-			this.moveRight();
+			this.sm.getSCIRightButton().raisePressed();
 		}
 
 		if (code == KeyEvent.VK_LEFT){
-			this.moveLeft();
+			this.sm.getSCILeftButton().raisePressed();
 		}
 
 		if (code == KeyEvent.VK_P){
-			this.pause();
+			this.sm.getSCIGame().raisePausePressed();
 		}
 		
 		if (code == KeyEvent.VK_A){
-			this.autopilot();
+			this.sm.getSCIGame().raiseAutopilotPressed();
+		}
+		
+		if (code == KeyEvent.VK_M){
+			this.sm.getSCIGame().raiseManualControlPressed();
 		}
 	}
 
@@ -156,15 +162,6 @@ public class Game extends JPanel implements KeyListener, ActionListener {
 	public void keyReleased(KeyEvent e){}
 
 	
-	public void moveLeft() {
-		sm.getSCILeftButton().raisePressed();			
-	}
-
-	
-	public void moveRight() {
-		sm.getSCIRightButton().raisePressed();
-	}
-
 	public void moveRocket(){
 
 		sm.runCycle();
@@ -175,16 +172,6 @@ public class Game extends JPanel implements KeyListener, ActionListener {
 		
 		//System.out.println(sm.getRocketY());
 	}
-
-	public void pause() {
-		sm.getSCIGame().raisePausePressed();
-	}
-	
-	public void autopilot() {
-		sm.getSCIGame().raiseAutopilotPressed();
-	}
-
-	
 
 	SCIGameListener myStateMachineEventListener = new SCIGameListener() {
 

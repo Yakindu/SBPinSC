@@ -16,6 +16,8 @@ public class RocketLandingScene extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	protected static final int GROUND_OFFSET = 390;
+	
 	public Platform platform;
 	public Ground ground;
 	public Wall wall1;
@@ -29,12 +31,12 @@ public class RocketLandingScene extends JPanel {
 	public RocketLandingScene() {
 		super();
 		
-		this.platform = new Platform(150, 20);
-		this.ground = new Ground(0, 340, 300, 30);
-		this.wall1 = new Wall(10);
-		this.wall2 = new Wall(270);
-		this.rocket = new Rocket(new Rectangle(0, 0, 20, 50));
-		this.bg = new Background();
+		this.platform = new Platform(145, 30, GROUND_OFFSET);
+		this.ground = new Ground(0, 0, 300, 10, GROUND_OFFSET);
+		this.wall1 = new Wall(10, GROUND_OFFSET);
+		this.wall2 = new Wall(270, GROUND_OFFSET);
+		this.rocket = new Rocket(new Rectangle(0, 0, 20, 50), GROUND_OFFSET);
+		this.bg = new Background(GROUND_OFFSET);
 
 	}
 	
@@ -61,10 +63,10 @@ public class RocketLandingScene extends JPanel {
 				RenderingHints.VALUE_ANTIALIAS_ON);
 
 		bg.paint(g2d);
-		ground.paint(g2d);
-		platform.paint(g2d);
 		wall1.paint(g2d);
 		wall2.paint(g2d);
+		ground.paint(g2d);
+		platform.paint(g2d);
 		rocket.paint(g2d);
 
 		drawCenteredString(g2d, getMessage(), (int)(0.5 * this.getWidth()), 50);

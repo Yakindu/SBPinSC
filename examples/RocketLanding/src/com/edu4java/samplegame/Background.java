@@ -10,8 +10,8 @@ import javax.imageio.ImageIO;
 class Background extends GameAsset {
 	private Image image;
 
-	public Background() {
-		super();
+	public Background(int screenYOffset) {
+		super(screenYOffset);
 		
 		try {
 			this.image = ImageIO.read(new File("resources/sunrise-153600_1280.png"));
