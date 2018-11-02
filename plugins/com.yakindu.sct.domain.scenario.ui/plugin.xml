@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
- <extension
-         point="org.yakindu.sct.domain.modules">
-      <Module
-            domainID="com.yakindu.domain.scenario"
-            feature="org.yakindu.sct.simulation"
-            moduleProvider="com.yakindu.sct.domain.scenario.ui.simulation.ScenarioSimulationModuleProvider">
-      </Module>
-   </extension>
    <extension
          point="org.yakindu.sct.domain.modules">
       <Module
@@ -24,5 +16,30 @@
          feature="org.yakindu.sct.resource"
          moduleProvider="com.yakindu.sct.domain.scenario.resource.ScenarioResourceModuleProvider">
    </Module>
-</extension>
+	</extension>
+
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            allowMultiple="false"
+            category="org.yakindu.sct.category"
+            class="com.yakindu.sct.domain.scenario.ui.simulation.ScenarioSimulationView"
+            id="org.yakindu.sct.domain.scenario.ui.simulation.scenariosimulationview"
+            name="Scenario Simulation"
+            restorable="true">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="org.yakindu.sct.ui.SimulationPerspective">
+         <view
+               id="org.yakindu.sct.domain.scenario.ui.simulation.scenariosimulationview"
+               minimized="false"
+               relationship="stack"
+               relative="org.yakindu.sct.simulation.ui.declarationview">
+         </view>
+      </perspectiveExtension>
+   </extension>
+
 </plugin>
