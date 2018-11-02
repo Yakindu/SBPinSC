@@ -14,7 +14,14 @@
          point="org.yakindu.sct.domain.modules">
       <Module
             domainID="com.yakindu.domain.scenario"
+            feature="org.yakindu.sct.simulation"
+            moduleProvider="com.yakindu.sct.domain.scenario.simulation.ScenarioSimulationModuleProvider">
+      </Module>
+      <Module
+            domainID="com.yakindu.domain.scenario"
             feature="org.yakindu.sct.generator"
-            moduleProvider="org.yakindu.sct.domain.generic.generator.GeneratorModuleProvider"></Module>
+            moduleProvider="org.yakindu.sct.domain.generic.generator.GeneratorModuleProvider">
+      </Module>
+            
    </extension>
 </plugin>
