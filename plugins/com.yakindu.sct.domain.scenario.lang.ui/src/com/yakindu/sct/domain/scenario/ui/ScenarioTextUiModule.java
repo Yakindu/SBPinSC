@@ -17,8 +17,8 @@ import org.eclipse.xtext.ui.resource.SimpleResourceSetProvider;
 import org.eclipse.xtext.ui.resource.XtextResourceSetProvider;
 import org.eclipse.xtext.ui.shared.Access;
 import org.yakindu.base.utils.jface.help.CrossRefObjectTextHover;
+import org.yakindu.base.utils.jface.help.HelpHoverProvider;
 import org.yakindu.sct.model.stext.ui.contentassist.STextStatefulFactory;
-import org.yakindu.sct.model.stext.ui.help.CustomCSSHelpHoverProvider;
 import org.yakindu.sct.model.stext.ui.help.STextUserHelpDocumentationProvider;
 
 import com.google.inject.Binder;
@@ -48,7 +48,7 @@ public class ScenarioTextUiModule extends AbstractScenarioTextUiModule {
 	}
 
 	public Class<? extends IEObjectHoverProvider> bindIEObjectHoverProvider() {
-		return CustomCSSHelpHoverProvider.class;
+		return HelpHoverProvider.class;
 	}
 
 	@Override
