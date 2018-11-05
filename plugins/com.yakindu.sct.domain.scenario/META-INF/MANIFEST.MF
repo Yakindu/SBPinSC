@@ -19,6 +19,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.yakindu.sct.model.stext.lib,
  org.yakindu.sct.model.sexec,
  org.yakindu.base.expressions.interpreter
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Export-Package: com.yakindu.sct.domain.scenario.simulation
