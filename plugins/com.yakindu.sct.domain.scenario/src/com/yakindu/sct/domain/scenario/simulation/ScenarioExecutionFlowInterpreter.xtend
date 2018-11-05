@@ -12,14 +12,21 @@ import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sruntime.ExecutionEvent
 import org.yakindu.sct.simulation.core.sexec.interpreter.DefaultExecutionFlowInterpreter
 import com.google.inject.Singleton
+import org.yakindu.sct.model.sexec.ScheduleTimeEvent
 
 @Singleton
 class ScenarioExecutionFlowInterpreter extends DefaultExecutionFlowInterpreter implements IScenarioEvents {
 
 
+	protected ExecutionProcess process = new ExecutionProcess()
+	def ExecutionProcess getProcess() { return this.process }
+	
+
 	@Inject
 	protected extension IQualifiedNameProvider nameProvider
-//executionContext.getSlot(e.fullyQualifiedName.toString) as ExecutionEvent
+	
+	@Inject
+	protected extension InspectableTimeTaskScheduler timeTaskScheduler // TODO: make timeScheduler in base class protected!!
 	
 	protected List<org.yakindu.base.types.Event> requestedEvents
 	protected List<org.yakindu.base.types.Event> blockedEvents
@@ -29,6 +36,7 @@ class ScenarioExecutionFlowInterpreter extends DefaultExecutionFlowInterpreter i
 	protected int superCycleCount = 0
 	protected int microCycleCount = 0
 
+	
 	
 	override getRequestedEvents() {
 		return this.requestedEvents
@@ -48,28 +56,107 @@ class ScenarioExecutionFlowInterpreter extends DefaultExecutionFlowInterpreter i
 	
 	
 
-
-		 
-	override void runCycle() {
+	def void doRunCycle() {
+		
 		
 		// execute all environment events of the state machine ... 
 		super.runCycle
 	
-		determineEnabledEvents
+		// determineEnabledEvents
 		
-		while (enabledEvents !== null && enabledEvents.size > 0) {
-			
-			//System.out.println("enabled (" + superCycleCount + "." + microCycleCount + ") :" + enabledEvents.map([ e | e.fullyQualifiedName.toString]));
-			
-			enabledEvents.forEach[ e | (executionContext.getSlot(e.fullyQualifiedName.toString) as ExecutionEvent).raised = true]
-			super.runCycle
-			
-			determineEnabledEvents
-			
-			microCycleCount += 1
-		}
+//		while (enabledEvents !== null && enabledEvents.size > 0) {
+//			
+//			//System.out.println("enabled (" + superCycleCount + "." + microCycleCount + ") :" + enabledEvents.map([ e | e.fullyQualifiedName.toString]));
+//			
+//			enabledEvents.forEach[ e | (executionContext.getSlot(e.fullyQualifiedName.toString) as ExecutionEvent).raised = true]
+//			super.runCycle
+//			
+//			determineEnabledEvents
+//			
+//			microCycleCount += 1
+//		}
 		
 		superCycleCount += 1
+	}
+	
+		
+	def void doSelectEnabledEvents() {
+		determineEnabledEvents
+		
+		if (enabledEvents !== null && enabledEvents.size > 0) {
+			selectedEvents = new ArrayList<org.yakindu.base.types.Event>();
+			selectedEvents.addAll(enabledEvents)
+			
+			// selectedEvents.forEach[ e | (executionContext.getSlot(e.fullyQualifiedName.toString) as ExecutionEvent).raised = true]
+			
+			processEnabledEvents
+			microCycleCount += 1
+			
+		}
+	}
+	
+	
+	def void doProcessEnabledEvents() {
+
+		selectedEvents.forEach[ e | (executionContext.getSlot(e.fullyQualifiedName.toString) as ExecutionEvent).raised = true]		
+		super.runCycle
+		selectedEvents.clear
+		enabledEvents.clear
+		requestedEvents.clear
+		blockedEvents.clear
+		
+		selectEnabledEvents
+	}
+	
+		 
+	override void runCycle() {
+		
+		processCycle
+		selectEnabledEvents		
+	}
+	
+	
+	def void processCycle() {
+		
+		val runCycleStep = new AbstractExecutionStep("run cycle - super step") {
+			
+			override execute() {
+				doRunCycle				
+			}
+			
+		}
+		process.schedule(runCycleStep)
+		
+				
+	}
+	
+	
+	def void selectEnabledEvents() {
+
+		val step = new AbstractExecutionStep("select scenario events") {
+			
+			override execute() {
+				doSelectEnabledEvents				
+			}
+			
+			
+		}
+		process.schedule(step)
+		
+	}
+	
+	
+	def void processEnabledEvents() {
+
+		val step = new AbstractExecutionStep("process selected events") {
+			
+			override execute() {
+				doProcessEnabledEvents				
+			}
+			
+		}
+		process.schedule(step)
+		
 	}
 	
 	
@@ -149,5 +236,15 @@ class ScenarioExecutionFlowInterpreter extends DefaultExecutionFlowInterpreter i
 		// just do nothing
 	}
 	
+
+
+	override dispatch Object execute(ScheduleTimeEvent scheduleTimeEvent) {
+		val timeEvent = scheduleTimeEvent.timeEvent
+		val duration = statementInterpreter.evaluate(scheduleTimeEvent.timeValue, executionContext)
+		timeTaskScheduler.scheduleTimeTask(new InspectableTimeTask(timeEvent.name, [
+			executionContext.getEvent(timeEvent.name).raised = true
+		]), timeEvent.periodic, duration as Long)
+		null
+	}
 
 }

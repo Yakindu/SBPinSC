@@ -1,47 +1,45 @@
 package com.yakindu.sct.domain.scenario.simulation;
 
-import java.util.List;
+import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.CYCLE_BASED_ANNOTATION;
 
-import org.yakindu.base.types.Event;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.sruntime.SRuntimeFactory;
+import org.yakindu.sct.model.stext.stext.ArgumentedAnnotation;
+import org.yakindu.sct.simulation.core.engine.scheduling.ITimeTaskScheduler.TimeTask;
+import org.yakindu.sct.simulation.core.engine.scheduling.ITimeTaskScheduler.TimeTask.Priority;
 import org.yakindu.sct.simulation.core.sexec.container.CycleBasedSimulationEngine;
 
-public class ScenarioCycleBasedSimulationEngine extends CycleBasedSimulationEngine implements IScenarioEvents {
+public class ScenarioCycleBasedSimulationEngine extends ScenarioBasedSimulationEngine  {
 
+	
 	public ScenarioCycleBasedSimulationEngine(Statechart statechart) {
 		super(statechart);
 	}
 
 	@Override
-	public List<Event> getRequestedEvents() {
-		if (interpreter instanceof IScenarioEvents ) 
-			return ((IScenarioEvents)interpreter).getRequestedEvents();
-
-		return null;
+	public void init() {
+		super.init();
+		scheduleCycleEvent();
 	}
 
-	@Override
-	public List<Event> getBlockedEvents() {
-		if (interpreter instanceof IScenarioEvents ) 
-			return ((IScenarioEvents)interpreter).getBlockedEvents();
+	protected void scheduleCycleEvent() {
+		Long cyclePeriod = CycleBasedSimulationEngine.DEFAULT_CYCLE_PERIOD;
+		ArgumentedAnnotation cycleBased = (ArgumentedAnnotation) getStatechart()
+				.getAnnotationOfType(CYCLE_BASED_ANNOTATION);
+		if (cycleBased != null) {
+			cyclePeriod = (Long) statementInterpreter.evaluate(cycleBased.getExpressions().get(0),
+					SRuntimeFactory.eINSTANCE.createExecutionContext());
+		}
 
-		return null;
+		TimeTask cycleTask = new InspectableTimeTask("run cycle - super step", () -> {
+			try {
+				processRunCycle();
+			} catch (Exception e) {
+				handleException(e);
+			}
+		}, Priority.LOW);
+		timeTaskScheduler.scheduleTimeTask(cycleTask, true, cyclePeriod);
 	}
-
-	@Override
-	public List<Event> getEnabledEvents() {
-		if (interpreter instanceof IScenarioEvents ) 
-			return ((IScenarioEvents)interpreter).getSelectedEvents();
-
-		return null;
-	}
-
-	@Override
-	public List<Event> getSelectedEvents() {
-		if (interpreter instanceof IScenarioEvents ) 
-			return ((IScenarioEvents)interpreter).getSelectedEvents();
-
-		return null;
-	}
-
 }
+
+

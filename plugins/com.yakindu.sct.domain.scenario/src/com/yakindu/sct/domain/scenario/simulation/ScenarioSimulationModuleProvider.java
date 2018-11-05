@@ -10,6 +10,8 @@ package com.yakindu.sct.domain.scenario.simulation;
 
 import org.yakindu.sct.domain.generic.simulation.GenericSimulationModule;
 import org.yakindu.sct.domain.generic.simulation.SimulationModuleProvider;
+import org.yakindu.sct.simulation.core.engine.scheduling.DefaultTimeTaskScheduler;
+import org.yakindu.sct.simulation.core.engine.scheduling.ITimeTaskScheduler;
 import org.yakindu.sct.simulation.core.sexec.container.ISimulationEngineFactory;
 import org.yakindu.sct.simulation.core.sexec.interpreter.IExecutionFlowInterpreter;
 
@@ -36,6 +38,11 @@ public class ScenarioSimulationModuleProvider extends SimulationModuleProvider {
 			@Override
 			public Class<? extends IExecutionFlowInterpreter> bindIExecutionFlowInterpreter() {
 				return ScenarioExecutionFlowInterpreter.class;
+			}
+			
+			@SuppressWarnings("unused")
+			public Class<? extends ITimeTaskScheduler> bindITimeTaskScheduler() {
+				return InspectableTimeTaskScheduler.class;
 			}
 			
 		};
