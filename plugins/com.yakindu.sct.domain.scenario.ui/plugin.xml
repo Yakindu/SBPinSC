@@ -28,6 +28,14 @@
             name="Scenario Simulation"
             restorable="true">
       </view>
+      <view
+            allowMultiple="false"
+            category="org.yakindu.sct.category"
+            class="com.yakindu.sct.domain.scenario.ui.simulation.SimulationStepView"
+            id="org.yakindu.sct.domain.scenario.ui.simulation.simulationstepview"
+            name="Simulation Steps"
+            restorable="true">
+      </view>
    </extension>
    <extension
          point="org.eclipse.ui.perspectiveExtensions">
@@ -35,6 +43,12 @@
             targetID="org.yakindu.sct.ui.SimulationPerspective">
          <view
                id="org.yakindu.sct.domain.scenario.ui.simulation.scenariosimulationview"
+               minimized="false"
+               relationship="stack"
+               relative="org.yakindu.sct.simulation.ui.declarationview">
+         </view>
+          <view
+               id="org.yakindu.sct.domain.scenario.ui.simulation.simulationstepview"
                minimized="false"
                relationship="stack"
                relative="org.yakindu.sct.simulation.ui.declarationview">
