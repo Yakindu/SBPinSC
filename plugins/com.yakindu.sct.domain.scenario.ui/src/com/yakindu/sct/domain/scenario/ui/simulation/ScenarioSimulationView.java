@@ -71,12 +71,12 @@ public class ScenarioSimulationView extends AbstractDebugTargetView {
 				requestedEventViewer.setInput(scenarioEvents.getRequestedEvents());
 				blockedEventViewer.setInput(scenarioEvents.getBlockedEvents());
 				enabledEventViewer.setInput(scenarioEvents.getEnabledEvents());
-//				selectedEventViewer.setInput(scenarioEvents.getSelectedEvents());
+				selectedEventViewer.setInput(scenarioEvents.getSelectedEvents());
 			} else {
 				requestedEventViewer.setInput(null);
 				blockedEventViewer.setInput(null);			
 				enabledEventViewer.setInput(null);
-//				selectedEventViewer.setInput(null);
+				selectedEventViewer.setInput(null);
 			}
 		});
 	}
@@ -145,10 +145,10 @@ public class ScenarioSimulationView extends AbstractDebugTargetView {
 		enabledEventViewer = createEventTable(vSash, "enabled");
 		enabledEventViewer.setInput(new ArrayList<Event>());
 
-//		selectedEventViewer = createEventTable(vSash, "selected");
-//		selectedEventViewer.setInput(new ArrayList<Event>());
+		selectedEventViewer = createEventTable(vSash, "selected");
+		selectedEventViewer.setInput(new ArrayList<Event>());
 		
-		vSash.setWeights(new int[]{5, 2});
+		vSash.setWeights(new int[]{5, 2, 2});
 
 	}
 	
