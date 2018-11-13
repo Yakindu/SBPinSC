@@ -98,7 +98,7 @@ class Statemachine {
 		«IF flow.timed»
 			import «entry.getBasePackageName()».ITimer;
 		«ENDIF»
-		import java.util.HashSet;
+		import java.util.ArrayList;
 		import java.util.Iterator;
 	'''
 	
@@ -601,7 +601,7 @@ class Statemachine {
 	
 	def protected executeRequestedEventsFunction(ExecutionFlow flow) '''
 		private void executeRequestedEvents() {
-			HashSet<String> enabledEvents = getEnabledEvents();
+			List<String> enabledEvents = getEnabledEvents();
 			String nextEvent = chooseEvent(enabledEvents);
 			while (nextEvent != null){
 				raiseNextEvent(nextEvent);			
@@ -682,7 +682,7 @@ class Statemachine {
 	'''
 	
 	def protected newFunction(ExecutionFlow flow)'''
-		HashSet<String> enabledEvents = getEnabledEvents();
+		List<String> enabledEvents = getEnabledEvents();
 		String nextEvent = chooseEvent(enabledEvents);
 		raiseNextEvent(nextEvent);
 	'''
@@ -723,47 +723,45 @@ class Statemachine {
 	
 	def protected getGetRequestedFunctions(ExecutionFlow flow)'''
 	«FOR state : flow.states»
-		private HashSet<String> requested_«state.stateName.asEscapedIdentifier»(){
-		HashSet<String> requestedList = new HashSet<String>();
+		private List<String> requested_«state.stateName.asEscapedIdentifier»(List<String> requestedList) {
 		«val sourceState = state.sourceElement as State»
 			«FOR requestedEventSet : sourceState.scopes.filter(ScenarioStateScope).map[eventSets.filter(RequestedEventSet)].flatten»
 				«FOR event : requestedEventSet.events»
-					requestedList.add("«event.symbol»");
+					if (!requestedList.contains("«event.symbol»")) requestedList.add("«event.symbol»");
 				«ENDFOR»
 			«ENDFOR»
-		«IF state.superScope.superScope.superScope !== null»
-			requestedList.addAll(requested_«state.superScope.superScope.stateName.asEscapedIdentifier»());
-		«ENDIF»
-		return requestedList;			
+			«IF state.superScope.superScope.superScope !== null»
+				requested_«state.superScope.superScope.stateName.asEscapedIdentifier»(requestedList);
+			«ENDIF»
+			return requestedList;			
 		}
-			
+		
 	«ENDFOR»
 	
 	'''
 	
 	def protected getBlockedFunctions(ExecutionFlow flow)'''
 	«FOR state : flow.states»
-		private HashSet<String> blocked_«state.stateName.asEscapedIdentifier»(){
-		HashSet<String> blockedList = new HashSet<String>();
+		private List<String> blocked_«state.stateName.asEscapedIdentifier»(List<String> blockedList){
 		«val sourceState = state.sourceElement as State»
 			«FOR blockedEventSet : sourceState.scopes.filter(ScenarioStateScope).map[eventSets.filter(BlockedEventSet)].flatten»
 				«FOR event : blockedEventSet.events»
-					blockedList.add("«event.symbol»");
+					if ( ! blockedList.contains("«event.symbol»") ) blockedList.add("«event.symbol»");
 				«ENDFOR»
 			«ENDFOR»
-		«IF state.superScope.superScope.superScope !== null»
-			blockedList.addAll(blocked_«state.superScope.superScope.stateName.asEscapedIdentifier»());
-		«ENDIF»
-		return blockedList;			
+			«IF state.superScope.superScope.superScope !== null»
+				blocked_«state.superScope.superScope.stateName.asEscapedIdentifier»(blockedList);
+			«ENDIF»
+			return blockedList;			
 		}	
 	«ENDFOR»
 	
 	'''
 		
 	def protected getEnabledEventsFunction(ExecutionFlow flow)'''
-	private HashSet<String> getEnabledEvents(){
-		HashSet<String> requestedEvents = getAllRequestedEvents();
-		HashSet<String> blockedEvents = getAllBlockedEvents();
+	private List<String> getEnabledEvents(){
+		List<String> requestedEvents = getAllRequestedEvents();
+		List<String> blockedEvents = getAllBlockedEvents();
 		requestedEvents.removeAll(blockedEvents);
 		return requestedEvents;
 	}
@@ -771,13 +769,13 @@ class Statemachine {
 	'''
 	
 	def protected getAllRequestedEventsFunction(ExecutionFlow flow)'''
-	private HashSet<String> getAllRequestedEvents(){
-		HashSet<String> requestedEvents = new HashSet<String>();
+	private List<String> getAllRequestedEvents(){
+		List<String> requestedEvents = new ArrayList<String>();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 				«FOR state : flow.states»
 					case «state.stateName.asEscapedIdentifier»:
-						requestedEvents.addAll(requested_«state.stateName.toFirstLower»());
+						requested_«state.stateName.toFirstLower»(requestedEvents);
 						break;
 				«ENDFOR»
 				default:
@@ -791,13 +789,13 @@ class Statemachine {
 	'''
 	
 	def protected getAllBlockedEventsFunction(ExecutionFlow flow)'''
-	private HashSet<String> getAllBlockedEvents(){
-		HashSet<String> blockedEvents = new HashSet<String>();
+	private List<String> getAllBlockedEvents(){
+		List<String> blockedEvents = new ArrayList<String>();
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 				«FOR state : flow.states»
 					case «state.stateName.asEscapedIdentifier»:
-						blockedEvents.addAll(blocked_«state.stateName.toFirstLower»());
+						blocked_«state.stateName.toFirstLower»(blockedEvents);
 						break;
 				«ENDFOR»
 				default:
@@ -811,7 +809,7 @@ class Statemachine {
 	'''
 	
 	def protected chooseEventFucntion(ExecutionFlow flow)'''
-	private String chooseEvent(HashSet<String> events){
+	private String chooseEvent(List<String> events){
 		if (!events.isEmpty()){
 			Iterator<String> it = events.iterator();
 			return it.next();
