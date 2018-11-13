@@ -1,6 +1,8 @@
 package com.edu4java.samplegame;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,8 +14,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import org.yakindu.scr.TimerService;
-import org.yakindu.scr.rocketlanding2.IRocketLanding2Statemachine.SCIGameListener;
-import org.yakindu.scr.rocketlanding2.SynchronizedRocketLanding2Statemachine;
+import org.yakindu.scr.rocketlanding.IRocketLandingStatemachine.SCIGameListener;
+import org.yakindu.scr.rocketlanding.SynchronizedRocketLandingStatemachine;
 
 @SuppressWarnings("serial")
 
@@ -22,7 +24,7 @@ public class Game extends JPanel implements KeyListener, ActionListener {
 	public static final int FRAME_WIDTH = 300;
 	public static  final int FRAME_HEIGHT = 400;
 
-	private SynchronizedRocketLanding2Statemachine sm;
+	private SynchronizedRocketLandingStatemachine sm;
 
 	private JButton buttonPauseUnpause;
 	private JButton buttonLeft;
@@ -40,6 +42,13 @@ public class Game extends JPanel implements KeyListener, ActionListener {
 		setFocusable(true);
 		setFocusTraversalKeysEnabled(false);
 		
+		
+		JPanel pane = new JPanel();
+		pane.setLayout(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
+		c.fill = GridBagConstraints.HORIZONTAL;
+
+		
 		setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 //		setLayout(null);
 		
@@ -55,7 +64,7 @@ public class Game extends JPanel implements KeyListener, ActionListener {
 				sm.getSCIGame().raiseAutopilotPressed();
 			}
 		});
-
+		
 		this.buttonHumanPilot = new JButton("Manual Control");
 		this.buttonHumanPilot.setPreferredSize(smallButtonDimension);
 	    this.buttonHumanPilot.addActionListener( new ActionListener() {
@@ -99,14 +108,32 @@ public class Game extends JPanel implements KeyListener, ActionListener {
 		this.scene.setMaximumSize(this.scene.getPreferredSize());
 		
 		this.add(this.scene);
+		this.add(pane);
 		
-		this.add(this.buttonAutoPilot);
-		this.add(this.buttonHumanPilot);
-		this.add(this.buttonPauseUnpause);
-		this.add(this.buttonLeft);
-		this.add(this.buttonRight);
+		c.gridx = 0;
+		c.gridy = 0;
+		pane.add(this.buttonAutoPilot, c);
 		
-		this.sm = new SynchronizedRocketLanding2Statemachine();
+		c.gridx = 1;
+		c.gridy = 0;
+		pane.add(this.buttonHumanPilot, c);
+		
+		c.gridx = 0;
+		c.gridy = 1;
+		c.gridwidth = 2;
+		pane.add(this.buttonPauseUnpause, c);
+		
+		c.gridx = 0;
+		c.gridy = 2;
+		c.gridwidth = 1;
+		pane.add(this.buttonLeft, c);
+
+		c.gridx = 1;
+		c.gridy = 2;
+		pane.add(this.buttonRight, c);
+		
+		
+		this.sm = new SynchronizedRocketLandingStatemachine();
 		sm.setTimer(new TimerService());
 		sm.init();
 		
