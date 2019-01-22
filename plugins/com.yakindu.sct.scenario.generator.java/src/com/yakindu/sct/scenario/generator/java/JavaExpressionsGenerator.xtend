@@ -17,14 +17,15 @@ import org.yakindu.base.expressions.expressions.ArgumentExpression
 import org.yakindu.base.expressions.expressions.AssignmentExpression
 import org.yakindu.base.expressions.expressions.AssignmentOperator
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
-import org.yakindu.base.expressions.expressions.Expression
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.expressions.expressions.LogicalRelationExpression
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
 import org.yakindu.base.expressions.expressions.RelationalOperator
 import org.yakindu.base.types.Declaration
+import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Property
+import org.yakindu.base.types.TypedDeclaration
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer
 import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
@@ -145,7 +146,7 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 		'''«code»(«FOR arg : args SEPARATOR ", "»«arg.code»«ENDFOR»)'''
 	}
 
-	def dispatch String code(Declaration it) {
+	def dispatch String code(TypedDeclaration it) {
 		getContext + identifier
 	}
 

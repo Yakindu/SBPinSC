@@ -24,3 +24,4 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Import-Package: com.yakindu.sct.domain.scenario.simulation,
  org.yakindu.sct.simulation.core.sexec.interpreter
+Automatic-Module-Name: com.yakindu.sct.domain.scenario.ui
