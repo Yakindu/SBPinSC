@@ -23,10 +23,10 @@ import com.google.common.collect.ImmutableMap;
 import com.google.inject.Module;
 import com.google.inject.util.Modules;
 import com.yakindu.sct.domain.scenario.ScenarioTextRuntimeModule;
+import com.yakindu.sct.domain.scenario.lang.ui.internal.LangActivator;
 import com.yakindu.sct.domain.scenario.modules.ScenarioTextEntryRuleModule;
 import com.yakindu.sct.domain.scenario.modules.ScenarioTextEntryRuleUIModule;
 import com.yakindu.sct.domain.scenario.ui.ScenarioTextUiModule;
-import com.yakindu.sct.domain.scenario.ui.internal.ScenarioTextActivator;
 
 /**
  *
@@ -45,11 +45,11 @@ public class ScenarioEditorModuleProvider extends EditorModuleProvider {
 		return Modules.override(getLanguageModule()).with(new ScenarioTextEntryRuleModule(rule),
 				new ScenarioTextEntryRuleUIModule(rule));
 	}
-
+	@Override
 	protected Module getLanguageUiModule() {
-		return (Module) new ScenarioTextUiModule(ScenarioTextActivator.getInstance());
+		return (Module) new ScenarioTextUiModule(LangActivator.getInstance());
 	}
-
+	@Override
 	protected Module getLanguageRuntimeModule() {
 		return new ScenarioTextRuntimeModule();
 	}

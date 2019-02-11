@@ -10,8 +10,8 @@ import com.google.inject.Binder;
 import com.google.inject.Module;
 import com.google.inject.util.Modules;
 import com.yakindu.sct.domain.scenario.ScenarioTextRuntimeModule;
+import com.yakindu.sct.domain.scenario.lang.ui.internal.LangActivator;
 import com.yakindu.sct.domain.scenario.ui.ScenarioTextUiModule;
-import com.yakindu.sct.domain.scenario.ui.internal.ScenarioTextActivator;
 
 public class ScenarioResourceModuleProvider implements IModuleProvider {
 
@@ -21,7 +21,7 @@ public class ScenarioResourceModuleProvider implements IModuleProvider {
 			return getLanguageRuntimeModule();
 		}
 		Module module = Modules.override(getLanguageRuntimeModule())
-				.with(new ScenarioTextUiModule(ScenarioTextActivator.getInstance()));
+				.with(new ScenarioTextUiModule(LangActivator.getInstance()));
 		module = Modules.override(module).with(new Module() {
 			@Override
 			public void configure(Binder binder) {

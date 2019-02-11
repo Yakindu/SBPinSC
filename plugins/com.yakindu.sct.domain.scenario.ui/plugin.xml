@@ -9,15 +9,6 @@
             moduleProvider="com.yakindu.sct.domain.scenario.ui.editor.ScenarioEditorModuleProvider">
       </Module>
    </extension>
-    <extension
-      point="org.yakindu.sct.domain.modules">
-   <Module
-         domainID="com.yakindu.domain.scenario"
-         feature="org.yakindu.sct.resource"
-         moduleProvider="com.yakindu.sct.domain.scenario.resource.ScenarioResourceModuleProvider">
-   </Module>
-	</extension>
-
    <extension
          point="org.eclipse.ui.views">
       <view

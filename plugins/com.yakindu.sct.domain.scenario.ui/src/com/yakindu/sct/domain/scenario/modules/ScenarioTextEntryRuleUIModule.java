@@ -1,7 +1,7 @@
 package com.yakindu.sct.domain.scenario.modules;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.ui.editor.contentassist.antlr.IContentAssistParser;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser;
 import org.yakindu.sct.domain.generic.editor.EntryRuleUIModule;
 
 import com.yakindu.sct.domain.scenario.ui.contentassist.EntryRuleContentAssistParser;

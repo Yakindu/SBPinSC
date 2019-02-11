@@ -20,18 +20,19 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.antlr.runtime,
  org.eclipse.xtext.common.types,
  org.objectweb.asm;bundle-version="[5.0.1,6.0.0)";resolution:=optional,
- org.yakindu.sct.domain
+ org.yakindu.sct.domain,
+ org.eclipse.xtend.lib
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: com.yakindu.sct.domain.scenario,
  com.yakindu.sct.domain.scenario.formatting,
  com.yakindu.sct.domain.scenario.generator,
- com.yakindu.sct.domain.scenario.parseTreeConstruction,
  com.yakindu.sct.domain.scenario.parser,
  com.yakindu.sct.domain.scenario.parser.antlr,
  com.yakindu.sct.domain.scenario.parser.antlr.internal,
  com.yakindu.sct.domain.scenario.scenariotext,
  com.yakindu.sct.domain.scenario.scoping,
  com.yakindu.sct.domain.scenario.services,
- com.yakindu.sct.domain.scenario.validation
+ com.yakindu.sct.domain.scenario.validation,
+ com.yakindu.sct.domain.scenario.serializer
 

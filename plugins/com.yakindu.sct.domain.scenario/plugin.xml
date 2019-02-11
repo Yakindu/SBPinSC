@@ -22,6 +22,10 @@
             feature="org.yakindu.sct.generator"
             moduleProvider="org.yakindu.sct.domain.generic.generator.GeneratorModuleProvider">
       </Module>
-            
+            <Module
+            domainID="com.yakindu.domain.scenario"
+            feature="org.yakindu.sct.resource"
+            moduleProvider="com.yakindu.sct.domain.scenario.ScenarioDomainResourceModuleProvider">
+      </Module>
    </extension>
 </plugin>
